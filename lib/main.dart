@@ -1,12 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:qaida/auth/auth.dart';
 import 'package:qaida/providers/auth.dart';
+import 'package:qaida/providers/template.dart';
+import 'package:qaida/template.dart';
 
 void main() {
   runApp(
-    ChangeNotifierProvider(
-      create: (context) => AuthProvider(),
+    MultiProvider(
+      providers: [
+        ChangeNotifierProvider<AuthProvider>(
+          create: (context) => AuthProvider(),
+        ),
+        ChangeNotifierProvider<TemplateProvider>(
+          create: (context) => TemplateProvider(),
+        ),
+      ],
       child: const MyApp(),
     ),
   );
@@ -18,13 +26,10 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        useMaterial3: true,
-      ),
-      home: const Auth(),
+      title: 'Qaida',
+      home: Template(),
     );
   }
 }

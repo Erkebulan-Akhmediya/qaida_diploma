@@ -4,12 +4,16 @@ class AuthProvider extends ChangeNotifier {
   int _authPageIndex = 0;
   int get authPageIndex => _authPageIndex;
 
+  bool _isAuthorized = false;
+  bool get isAuthorized => _isAuthorized;
+
   changeAuthPage() {
-    if (_authPageIndex == 0) {
-      _authPageIndex = 1;
-    } else {
-      _authPageIndex = 0;
-    }
+    _authPageIndex = _authPageIndex == 0 ? 1 : 0;
+    notifyListeners();
+  }
+
+  changeAuthStatus() {
+    _isAuthorized = _isAuthorized == false ? true : false;
     notifyListeners();
   }
 }
