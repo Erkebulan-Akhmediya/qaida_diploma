@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:qaida/components/full_width_button.dart';
 import 'package:qaida/providers/auth.dart';
 
 class Login extends StatelessWidget {
@@ -11,12 +12,19 @@ class Login extends StatelessWidget {
       body: Padding(
         padding: const EdgeInsets.all(20.0),
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
+            const Text(
+              'Введите данные',
+              style: TextStyle(
+                fontSize: 20.0,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
             const TextField(
               decoration: InputDecoration(
-                labelText: 'Имя пользователя',
+                labelText: 'Эл. почта',
               ),
             ),
             const TextField(
@@ -24,15 +32,23 @@ class Login extends StatelessWidget {
                 labelText: 'Пароль',
               ),
             ),
-            ElevatedButton(
+            FullWidthButton(
+              text: 'Войти',
+              margin: const EdgeInsets.only(top: 20.0),
               onPressed: () {},
-              child: const Text('Войти'),
             ),
-            TextButton(
-              onPressed: () {
-                context.read<AuthProvider>().changeAuthPage();
-              },
-              child: const Text('Нет аккаунта? Зарегистрируйтесь'),
+            Expanded(
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: <Widget>[
+                  TextButton(
+                    onPressed: () {
+                      context.read<AuthProvider>().changeAuthPage();
+                    },
+                    child: const Text('Еще нет аккаунта? Регистрация'),
+                  ),
+                ],
+              ),
             ),
           ],
         ),
