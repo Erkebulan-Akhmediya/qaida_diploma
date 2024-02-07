@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:qaida/components/full_width_button.dart';
+import 'package:qaida/components/password.dart';
 import 'package:qaida/providers/auth.dart';
 
 class Login extends StatelessWidget {
@@ -27,27 +28,26 @@ class Login extends StatelessWidget {
                 labelText: 'Эл. почта',
               ),
             ),
-            const TextField(
-              decoration: InputDecoration(
-                labelText: 'Пароль',
-              ),
-            ),
+            const Password(),
             FullWidthButton(
               text: 'Войти',
               margin: const EdgeInsets.only(top: 20.0),
               onPressed: () {},
             ),
             Expanded(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: <Widget>[
-                  TextButton(
-                    onPressed: () {
-                      context.read<AuthProvider>().changeAuthPage();
-                    },
-                    child: const Text('Еще нет аккаунта? Регистрация'),
-                  ),
-                ],
+              child: SizedBox(
+                width: double.infinity,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: <Widget>[
+                    TextButton(
+                      onPressed: () {
+                        context.read<AuthProvider>().changeAuthPage();
+                      },
+                      child: const Text('Еще нет аккаунта? Регистрация'),
+                    ),
+                  ],
+                ),
               ),
             ),
           ],

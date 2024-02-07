@@ -16,6 +16,7 @@ class Template extends StatelessWidget {
     return Scaffold(
       appBar: AppBar(
         title: Text(pageTitle),
+        centerTitle: true,
       ),
       body: IndexedStack(
         index: templateProvider.templatePageIndex,

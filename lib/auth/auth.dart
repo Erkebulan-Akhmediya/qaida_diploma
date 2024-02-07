@@ -11,7 +11,10 @@ class Auth extends StatelessWidget {
   Widget build(BuildContext context) {
     final authProvider = context.watch<AuthProvider>();
     return Scaffold(
-      appBar: AppBar(),
+      appBar: AppBar(
+        title: Text(authProvider.authPageTitle),
+        centerTitle: true,
+      ),
       body: IndexedStack(
         index: authProvider.authPageIndex,
         children: const <Widget>[
