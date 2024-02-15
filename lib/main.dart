@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:qaida/providers/auth.dart';
+import 'package:qaida/providers/interests.dart';
 import 'package:qaida/providers/template.dart';
 import 'package:qaida/template.dart';
 
@@ -13,6 +14,9 @@ void main() {
         ),
         ChangeNotifierProvider<TemplateProvider>(
           create: (context) => TemplateProvider(),
+        ),
+        ChangeNotifierProvider<InterestsProvider>(
+          create: (context) => InterestsProvider(),
         ),
       ],
       child: const MyApp(),

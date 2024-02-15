@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:qaida/auth/interests.dart';
+import 'package:qaida/auth/validators.dart';
 import 'package:qaida/components/full_width_button.dart';
 import 'package:qaida/components/password.dart';
 import 'package:qaida/providers/auth.dart';
+import 'package:qaida/providers/interests.dart';
 
 class Registration extends StatelessWidget {
   const Registration({super.key});
@@ -49,37 +52,18 @@ class Registration extends StatelessWidget {
                   ),
                 ),
               ),
-              Row(
-                children: <Widget>[
-                  Icon(
-                    Icons.check,
-                    color: authProvider.isPasswordLenCorrect ? Colors.green : Colors.grey,
-                  ),
-                  const Text('8 символов (не более 20)'),
-                ],
-              ),
-              Row(
-                children: <Widget>[
-                  Icon(
-                    Icons.check,
-                    color: authProvider.hasLetterAndDigit ? Colors.green : Colors.grey,
-                  ),
-                  const Text('1 буква и 1 цифра'),
-                ],
-              ),
-              Row(
-                children: <Widget>[
-                  Icon(
-                    Icons.check,
-                    color: authProvider.hasSpecialChar ? Colors.green : Colors.grey,
-                  ),
-                  const Text('1 спец. символ (например, #?!\$&@)'),
-                ],
-              ),
+              const Validators(),
               FullWidthButton(
                 text: 'Зарегистрироваться',
                 margin: const EdgeInsets.only(top: 20.0),
-                onPressed: () {},
+                onPressed: () async {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const Interests(),
+                    ),
+                  );
+                },
               ),
               Expanded(
                 child: SizedBox(
