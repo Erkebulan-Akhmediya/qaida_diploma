@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:qaida/auth/interests.dart';
+import 'package:qaida/interests/loader.dart';
 import 'package:qaida/auth/validators.dart';
 import 'package:qaida/components/full_width_button.dart';
 import 'package:qaida/components/password.dart';
@@ -60,7 +60,7 @@ class Registration extends StatelessWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => const Interests(),
+                      builder: (context) => const Loader(),
                     ),
                   );
                 },
