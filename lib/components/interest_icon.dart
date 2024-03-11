@@ -1,15 +1,25 @@
 import 'package:flutter/material.dart';
 
 class InterestIcon extends StatelessWidget {
-  const InterestIcon({super.key});
+  final bool open;
+
+  const InterestIcon({super.key, required this.open});
 
   @override
   Widget build(BuildContext context) {
     return CustomPaint(
       painter: HexagonPainter(),
-      child: const Padding(
-        padding: EdgeInsets.all(5.0),
-        child: Icon(Icons.menu),
+      child: Padding(
+        padding: const EdgeInsets.all(5.0),
+        child: open ?
+          const Icon(
+            Icons.keyboard_arrow_up,
+            size: 50,
+          ) :
+          const Icon(
+            Icons.menu,
+            size: 50,
+          ),
       ),
     );
   }

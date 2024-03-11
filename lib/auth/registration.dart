@@ -5,10 +5,11 @@ import 'package:qaida/auth/validators.dart';
 import 'package:qaida/components/full_width_button.dart';
 import 'package:qaida/components/password.dart';
 import 'package:qaida/providers/auth.dart';
-import 'package:qaida/providers/interests.dart';
 
 class Registration extends StatelessWidget {
-  const Registration({super.key});
+  final emailController = TextEditingController();
+
+  Registration({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -57,6 +58,7 @@ class Registration extends StatelessWidget {
                 text: 'Зарегистрироваться',
                 margin: const EdgeInsets.only(top: 20.0),
                 onPressed: () async {
+                  context.read<AuthProvider>().register('email', 'password');
                   Navigator.push(
                     context,
                     MaterialPageRoute(

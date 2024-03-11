@@ -22,6 +22,7 @@ class _LoaderState extends State<Loader> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Color(int.parse('FFD3D3D3', radix: 16)),
       body: FutureBuilder<List>(
         future: _interests,
         builder: (context, snapshot) {

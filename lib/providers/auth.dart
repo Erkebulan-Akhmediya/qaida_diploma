@@ -1,4 +1,7 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:http/http.dart' as http;
 
 class AuthProvider extends ChangeNotifier {
   int _authPageIndex = 0;
@@ -63,5 +66,19 @@ class AuthProvider extends ChangeNotifier {
       hasSpecialChar = false;
     }
     notifyListeners();
+  }
+
+  Future<http.Response> register(String email, String password) async {
+    final response = await http.post(
+      Uri.parse('http://10.0.2.2:8080/api/auth'),
+      body: jsonEncode({
+        'email': email,
+        'password': password,
+        'name': '',
+        'surname': '',
+      }),
+    );
+    print('${response.body} ${response.statusCode}');
+    return response;
   }
 }

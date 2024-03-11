@@ -29,7 +29,11 @@ class Interests extends StatelessWidget {
             fontSize: 20.0,
           ),
         ),
-        for (var i in interest) InterestItem(text: i['name']),
+        for (var i in interest)
+          InterestItem(
+            text: i['name'],
+            categories: i['categories'],
+          ),
       ],
     );
   }
