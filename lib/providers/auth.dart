@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
@@ -17,9 +15,6 @@ class AuthProvider extends ChangeNotifier {
   bool get isPasswordVisible => _isPasswordVisible;
 
   GlobalKey<FormState> loginFormKey = GlobalKey<FormState>();
-  GlobalKey<FormState> registrationFormKey = GlobalKey<FormState>();
-
-  TextEditingController registrationPasswordController = TextEditingController();
 
   bool isPasswordLenCorrect = false;
   bool hasLetterAndDigit = false;
@@ -41,8 +36,7 @@ class AuthProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  changeValidationState() {
-    String password = registrationPasswordController.text;
+  changeValidationState(String password) {
     if (
       password.length > 7
       && password.length <= 20
@@ -68,17 +62,18 @@ class AuthProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  Future<http.Response> register(String email, String password) async {
-    final response = await http.post(
+  Future register(String email, String password) async {
+    await http.post(
       Uri.parse('http://10.0.2.2:8080/api/auth'),
-      body: jsonEncode({
-        'email': email,
-        'password': password,
-        'name': '',
-        'surname': '',
-      }),
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      body: Uri(
+        queryParameters: {
+          'email': email,
+          'password': password,
+        },
+      ).query,
     );
-    print('${response.body} ${response.statusCode}');
-    return response;
   }
 }

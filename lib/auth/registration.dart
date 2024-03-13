@@ -1,19 +1,28 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:qaida/components/registration_footer.dart';
 import 'package:qaida/interests/loader.dart';
 import 'package:qaida/auth/validators.dart';
 import 'package:qaida/components/full_width_button.dart';
 import 'package:qaida/components/password.dart';
 import 'package:qaida/providers/auth.dart';
+import 'package:qaida/providers/registration.dart';
 
 class Registration extends StatelessWidget {
-  final emailController = TextEditingController();
+  const Registration({super.key});
 
-  Registration({super.key});
+  void navToInterest(BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => const Loader(),
+      ),
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
-    final authProvider = context.watch<AuthProvider>();
+    final registrationProvider = context.watch<RegistrationProvider>();
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(20.0),
@@ -30,14 +39,15 @@ class Registration extends StatelessWidget {
                 ),
               ),
               TextFormField(
+                controller: registrationProvider.emailController,
                 decoration: const InputDecoration(
                   labelText: 'Эл. почта',
                 ),
               ),
               Password(
-                controller: authProvider.registrationPasswordController,
+                controller: registrationProvider.passwordController,
                 onChanged: (password) {
-                  context.read<AuthProvider>().changeValidationState();
+                  context.read<AuthProvider>().changeValidationState(password);
                 },
               ),
               Container(
@@ -58,31 +68,24 @@ class Registration extends StatelessWidget {
                 text: 'Зарегистрироваться',
                 margin: const EdgeInsets.only(top: 20.0),
                 onPressed: () async {
-                  context.read<AuthProvider>().register('email', 'password');
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (context) => const Loader(),
-                    ),
-                  );
+                  try {
+                    await context.read<AuthProvider>()
+                      .register(
+                        registrationProvider.emailController.text,
+                        registrationProvider.passwordController.text
+                      );
+                    navToInterest(context);
+                  } catch(e) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text('Ошибка регистрации'),
+                      ),
+                    );
+                  }
                 },
               ),
-              Expanded(
-                child: SizedBox(
-                  width: double.infinity,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: <Widget>[
-                      TextButton(
-                        onPressed: () {
-                          context.read<AuthProvider>().changeAuthPage();
-                        },
-                        child: const Text('Уже есть аккаунт? Войти'),
-                      ),
-                    ],
-                  ),
-                ),
+              const Expanded(
+                child: RegistrationFooter(),
               ),
             ],
           ),
