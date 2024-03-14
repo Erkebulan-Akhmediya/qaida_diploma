@@ -20,23 +20,23 @@ class AuthProvider extends ChangeNotifier {
   bool hasLetterAndDigit = false;
   bool hasSpecialChar = false;
 
-  changeAuthPage() {
+  void changeAuthPage() {
     _authPageIndex = _authPageIndex == 0 ? 1 : 0;
     _authPageTitle = _authPageTitle == 'Войти' ? 'Зарегистрироваться' : 'Войти';
     notifyListeners();
   }
 
-  changeAuthStatus() {
+  void changeAuthStatus() {
     _isAuthorized = _isAuthorized == false ? true : false;
     notifyListeners();
   }
 
-  changePasswordVisibility() {
+  void changePasswordVisibility() {
     _isPasswordVisible = _isPasswordVisible == false ? true : false;
     notifyListeners();
   }
 
-  changeValidationState(String password) {
+  void changeValidationState(String password) {
     if (
       password.length > 7
       && password.length <= 20

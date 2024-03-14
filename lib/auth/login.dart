@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:qaida/components/full_width_button.dart';
 import 'package:qaida/components/password.dart';
 import 'package:qaida/providers/auth.dart';
+import 'package:qaida/providers/login.dart';
 
 class Login extends StatelessWidget {
   const Login({super.key});
@@ -10,6 +11,7 @@ class Login extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final authProvider = context.watch<AuthProvider>();
+    final loginProvider = context.watch<LoginProvider>();
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(20.0),
@@ -27,6 +29,7 @@ class Login extends StatelessWidget {
                 ),
               ),
               TextFormField(
+                controller: loginProvider.emailController,
                 validator: (email) {
                   if (email == null || email.isEmpty) {
                     return 'Такого пользователя не существует';
@@ -38,12 +41,30 @@ class Login extends StatelessWidget {
                   labelText: 'Эл. почта',
                 ),
               ),
-              const Password(),
+              Password(
+                controller: loginProvider.passwordController,
+              ),
               FullWidthButton(
                 text: 'Войти',
                 margin: const EdgeInsets.only(top: 20.0),
-                onPressed: () {
-                  authProvider.loginFormKey.currentState?.validate();
+                onPressed: () async {
+                  if (
+                    !authProvider.loginFormKey.currentState!.validate()
+                  ) return;
+                  bool isLoggedIn = await context.read<LoginProvider>().login(
+                    loginProvider.emailController.text,
+                    loginProvider.passwordController.text,
+                  );
+                  if (!isLoggedIn) {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text('Не удалось войти'),
+                      ),
+                    );
+                    return;
+                  }
+                  authProvider.changeAuthStatus();
+                  Navigator.pop(context);
                 },
               ),
               Expanded(
