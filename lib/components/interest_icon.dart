@@ -1,17 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:qaida/providers/interests.dart';
 
 class InterestIcon extends StatelessWidget {
-  final bool open;
+  final int index;
 
-  const InterestIcon({super.key, required this.open});
+  const InterestIcon({super.key, required this.index});
 
   @override
   Widget build(BuildContext context) {
+    final interestProvider = context.watch<InterestsProvider>();
     return CustomPaint(
       painter: HexagonPainter(),
       child: Padding(
         padding: const EdgeInsets.all(5.0),
-        child: open ?
+        child: interestProvider.openItems[index] ?
           const Icon(
             Icons.keyboard_arrow_up,
             size: 50,

@@ -1,24 +1,24 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:qaida/providers/interests.dart';
 
 class InterestSubcategories extends StatelessWidget {
-  final bool selected;
-  final String text;
-  final List categories;
+  final int index;
 
   const InterestSubcategories({
     super.key,
-    required this.selected,
-    required this.text,
-    required this.categories,
+    required this.index,
   });
 
   @override
   Widget build(BuildContext context) {
+    final interestProvider = context.watch<InterestsProvider>();
     return Container(
       width: 270,
       height: 300,
       decoration: BoxDecoration(
-        color: selected ? Colors.white : Colors.transparent,
+        color: interestProvider.selectedItems[index] ?
+          Colors.white : Colors.transparent,
         border: Border.all(
           color: Colors.black,
           width: 2.0,
@@ -30,14 +30,17 @@ class InterestSubcategories extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: <Widget>[
               Text(
-                text,
+                interestProvider.interests[index]['name'],
                 style: const TextStyle(
                   fontSize: 20.0,
                 ),
               ),
               Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Icon(selected ? Icons.check_circle : Icons.check_circle_outline),
+                child: Icon(
+                  interestProvider.selectedItems[index] ?
+                  Icons.check_circle : Icons.check_circle_outline
+                ),
               ),
             ],
           ),
@@ -48,16 +51,16 @@ class InterestSubcategories extends StatelessWidget {
                   for (var i = 0; i < 4; i++)
                     SizedBox(
                       width: 120,
-                      child: Text(categories[i]['name']),
+                      child: Text(interestProvider.subcategories(index)[i]['name']),
                     ),
                 ],
               ),
               Column(
                 children: <Widget>[
-                  for (var i = 4; i < categories.length; i++)
+                  for (var i = 4; i < interestProvider.subcategories(index).length; i++)
                     SizedBox(
                       width: 120,
-                      child: Text(categories[i]['name']),
+                      child: Text(interestProvider.subcategories(index)[i]['name']),
                     ),
                 ],
               ),

@@ -1,57 +1,36 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:qaida/components/interest_icon.dart';
 import 'package:qaida/components/interest_subcategories.dart';
 import 'package:qaida/components/interest_text.dart';
+import 'package:qaida/providers/interests.dart';
 
-class InterestItem extends StatefulWidget {
-  final String text;
-  final List categories;
+class InterestItem extends StatelessWidget {
+  final int index;
 
-  const InterestItem({super.key, required this.text, required this.categories});
-
-  @override
-  State<StatefulWidget> createState() => _InterestItemState();
-}
-
-class _InterestItemState extends State<InterestItem> {
-  bool _isSelected = false;
-  bool _isOpen = false;
-
-  void _changeSelect() {
-    setState(() {
-      _isSelected = !_isSelected;
-    });
-  }
-
-  void _changeOpen() {
-    setState(() {
-      _isOpen = !_isOpen;
-    });
-  }
+  const InterestItem({super.key, required this.index});
 
   @override
   Widget build(BuildContext context) {
+    final interestProvider = context.watch<InterestsProvider>();
     return Padding(
       padding: const EdgeInsets.all(10.0),
       child: Row(
-        crossAxisAlignment: _isOpen ? CrossAxisAlignment.start : CrossAxisAlignment.center,
+        crossAxisAlignment: interestProvider.openItems[index] ? CrossAxisAlignment.start : CrossAxisAlignment.center,
         children: <Widget>[
           GestureDetector(
-            onTap: _changeOpen,
-            child: InterestIcon(open: _isOpen,),
+            onTap: () {
+              context.read<InterestsProvider>().changeOpen(index);
+            },
+            child: InterestIcon(index: index),
           ),
           GestureDetector(
-            onTap: _changeSelect,
-            child: _isOpen ?
-              InterestSubcategories(
-                text: widget.text,
-                selected: _isSelected,
-                categories: widget.categories,
-              ) :
-              InterestText(
-                text: widget.text,
-                selected: _isSelected,
-              ),
+            onTap: () {
+              context.read<InterestsProvider>().changeSelect(index);
+            },
+            child: interestProvider.openItems[index] ?
+              InterestSubcategories(index: index) :
+              InterestText(index: index),
           ),
         ],
       ),

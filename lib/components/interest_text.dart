@@ -1,18 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:qaida/providers/interests.dart';
 
 class InterestText extends StatelessWidget {
-  final String text;
-  final bool selected;
+  final int index;
 
-  const InterestText({super.key, required this.text, required this.selected});
+  const InterestText({super.key, required this.index});
 
   @override
   Widget build(BuildContext context) {
+    final interestProvider = context.watch<InterestsProvider>();
     return Container(
       width: 270,
       height: 50,
       decoration: BoxDecoration(
-        color: selected ? Colors.white : Colors.transparent,
+        color: interestProvider.selectedItems[index] ? Colors.white : Colors.transparent,
         border: Border.all(
           color: Colors.black,
           width: 2.0,
@@ -22,14 +24,14 @@ class InterestText extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: <Widget>[
           Text(
-            text,
+            interestProvider.interests[index]['name'],
             style: const TextStyle(
               fontSize: 20.0,
             ),
           ),
           Padding(
             padding: const EdgeInsets.all(8.0),
-            child: Icon(selected ? Icons.check_circle : Icons.check_circle_outline),
+            child: Icon(interestProvider.selectedItems[index] ? Icons.check_circle : Icons.check_circle_outline),
           ),
         ],
       ),
