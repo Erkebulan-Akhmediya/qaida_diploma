@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:provider/provider.dart';
 import 'package:qaida/components/registration_footer.dart';
 import 'package:qaida/interests/loader.dart';
@@ -6,6 +7,7 @@ import 'package:qaida/auth/validators.dart';
 import 'package:qaida/components/full_width_button.dart';
 import 'package:qaida/components/password.dart';
 import 'package:qaida/providers/auth.dart';
+import 'package:qaida/providers/login.dart';
 import 'package:qaida/providers/registration.dart';
 
 class Registration extends StatelessWidget {
@@ -18,6 +20,44 @@ class Registration extends StatelessWidget {
         builder: (context) => const Loader(),
       ),
     );
+  }
+
+  void showRegistrationError(BuildContext context) {
+    ScaffoldMessenger.of(context).showSnackBar(
+      const SnackBar(
+        content: Text('Ошибка регистрации'),
+      ),
+    );
+  }
+
+  Future<void> handleRegistration(
+    BuildContext context,
+    String email,
+    String password
+  ) async {
+
+    try {
+      await context.read<AuthProvider>().register(email, password);
+    } catch(e) {
+      showRegistrationError(context);
+    }
+
+    try {
+      final response = await context.read<LoginProvider>().login(email, password);
+
+      const storage = FlutterSecureStorage();
+      await storage.write(
+        key: 'access_token',
+        value: response['access_token']
+      );
+      await storage.write(
+        key: 'refresh_token',
+        value: response['refresh_token']
+      );
+      navToInterest(context);
+    } catch(e) {
+      context.read<AuthProvider>().changeAuthPage();
+    }
   }
 
   @override
@@ -68,20 +108,11 @@ class Registration extends StatelessWidget {
                 text: 'Зарегистрироваться',
                 margin: const EdgeInsets.only(top: 20.0),
                 onPressed: () async {
-                  try {
-                    await context.read<AuthProvider>()
-                      .register(
-                        registrationProvider.emailController.text,
-                        registrationProvider.passwordController.text
-                      );
-                    navToInterest(context);
-                  } catch(e) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        content: Text('Ошибка регистрации'),
-                      ),
-                    );
-                  }
+                  await handleRegistration(
+                    context,
+                    registrationProvider.emailController.text,
+                    registrationProvider.passwordController.text
+                  );
                 },
               ),
               const Expanded(

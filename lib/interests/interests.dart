@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:provider/provider.dart';
 import 'package:qaida/components/interest_item.dart';
 import 'package:qaida/providers/interests.dart';
@@ -52,7 +53,16 @@ class Interests extends StatelessWidget {
               ),
               Expanded(
                 child: ElevatedButton(
-                  onPressed: () {},
+                  onPressed: () async {
+                    const storage = FlutterSecureStorage();
+                    String? token = await storage.read(key: 'access_token');
+
+                    List<String> interests = context.read<InterestsProvider>()
+                      .getSelectedIds();
+
+                    await context.read<InterestsProvider>()
+                      .sendInterests(token!, interests);
+                  },
                   child: const Text('Далее'),
                 ),
               ),

@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -6,7 +8,7 @@ class LoginProvider extends ChangeNotifier {
   TextEditingController emailController = TextEditingController();
   TextEditingController passwordController = TextEditingController();
 
-  Future<bool> login(String email, String password) async {
+  Future login(String email, String password) async {
     try {
       http.Response response = await http.post(
         Uri.parse('http://10.0.2.2:8080/api/auth/login'),
@@ -20,10 +22,12 @@ class LoginProvider extends ChangeNotifier {
           },
         ).query,
       );
-      if (response.statusCode == 201) return true;
-      return false;
+      if (response.statusCode == 201) {
+        return jsonDecode(response.body);
+      }
+      return null;
     } catch(e) {
-      return false;
+      return null;
     }
   }
 }
