@@ -12,7 +12,7 @@ class TemplateProvider extends ChangeNotifier {
   ];
   String get getTemplatePageTitle => _templatePageTitles[_templatePageIndex];
 
-  changeTemplatePage(int index) {
+  void changeTemplatePage(int index) {
     _templatePageIndex = index;
     notifyListeners();
   }

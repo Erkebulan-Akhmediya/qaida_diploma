@@ -113,6 +113,8 @@ class Registration extends StatelessWidget {
                     registrationProvider.emailController.text,
                     registrationProvider.passwordController.text
                   );
+                  registrationProvider.emailController.text = '';
+                  registrationProvider.passwordController.text = '';
                 },
               ),
               const Expanded(

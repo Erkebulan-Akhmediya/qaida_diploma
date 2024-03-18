@@ -51,11 +51,11 @@ class Login extends StatelessWidget {
                   if (
                     !authProvider.loginFormKey.currentState!.validate()
                   ) return;
-                  bool isLoggedIn = await context.read<LoginProvider>().login(
+                  final tokens = await context.read<LoginProvider>().login(
                     loginProvider.emailController.text,
                     loginProvider.passwordController.text,
                   );
-                  if (!isLoggedIn) {
+                  if (tokens == null) {
                     ScaffoldMessenger.of(context).showSnackBar(
                       const SnackBar(
                         content: Text('Не удалось войти'),

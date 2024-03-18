@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:qaida/providers/auth.dart';
+import 'package:qaida/providers/geolocation.dart';
 import 'package:qaida/providers/interests.dart';
 import 'package:qaida/providers/login.dart';
 import 'package:qaida/providers/registration.dart';
 import 'package:qaida/providers/template.dart';
+import 'package:qaida/providers/user.dart';
 import 'package:qaida/template.dart';
 
 void main() {
@@ -25,6 +27,12 @@ void main() {
         ),
         ChangeNotifierProvider<LoginProvider>(
           create: (context) => LoginProvider(),
+        ),
+        ChangeNotifierProvider<GeolocationProvider>(
+          create: (context) => GeolocationProvider(),
+        ),
+        ChangeNotifierProvider<UserProvider>(
+          create: (context) => UserProvider(),
         ),
       ],
       child: const MyApp(),
