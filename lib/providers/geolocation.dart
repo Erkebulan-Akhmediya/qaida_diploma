@@ -1,12 +1,12 @@
 import 'package:flutter/foundation.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:permission_handler/permission_handler.dart';
-import 'package:web_socket_channel/web_socket_channel.dart';
+import 'package:socket_io_client/socket_io_client.dart';
 
 class GeolocationProvider extends ChangeNotifier {
-  late WebSocketChannel channel;
+  Socket? socket;
 
-  getLocation() async {
+  Future getLocation() async {
     var status = await Permission.location.status;
     if (!status.isGranted) {
       status = await Permission.location.request();
@@ -24,27 +24,42 @@ class GeolocationProvider extends ChangeNotifier {
     };
   }
 
-  Future<void> connect() async {
-    channel = WebSocketChannel.connect(
-      Uri.parse('ws://10.0.2.2:8080/geolocation'),
-    );
-    await channel.ready;
-    channel.stream.listen((event) {
-      print(event);
-    });
+  void connect() {
+    if (socket == null) {
+      socket = io(
+        'http://10.0.2.2:8080/geolocation',
+        OptionBuilder().setTransports(['websocket']).build(),
+      );
+      socket?.onConnect((data) {
+        print('connected');
+      });
+      socket?.on('spot', (data) {
+        print(data);
+      });
+      print('listenning to spot events');
+    } else {
+      print('already connected');
+    }
   }
 
   void sendLocation(String userId, double lat, double lon) {
-    channel.sink.add({
-      "location": {
-        "lat": lat,
-        "lon": lon,
-      },
-      "user_id": userId,
-    });
+    final socket = this.socket;
+    if (socket != null) {
+      socket.emit('send-location', {
+        "location": {
+          "lat": lat,
+          "lon": lon,
+        },
+        "user_id": userId,
+      });
+      print('sent location');
+    }
   }
 
-  Future<void> close() async {
-    await channel.sink.close();
+  void close() {
+    final socket = this.socket;
+    if (socket != null) {
+      socket.destroy();
+    }
   }
 }

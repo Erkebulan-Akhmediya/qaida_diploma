@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:provider/provider.dart';
 import 'package:qaida/components/full_width_button.dart';
 import 'package:qaida/components/password.dart';
@@ -7,6 +8,51 @@ import 'package:qaida/providers/login.dart';
 
 class Login extends StatelessWidget {
   const Login({super.key});
+
+  String? emailValidator(String? email) {
+    if (email == null || email.isEmpty) {
+      return 'Такого пользователя не существует';
+    } else {
+      return null;
+    }
+  }
+
+  Future<void> handleLogin(
+    BuildContext context,
+    AuthProvider authProvider,
+    LoginProvider loginProvider,
+  ) async {
+    if (
+      !authProvider.loginFormKey.currentState!.validate()
+    ) return;
+
+    final tokens = await context.read<LoginProvider>().login(
+      loginProvider.emailController.text,
+      loginProvider.passwordController.text,
+    );
+
+    if (tokens == null) {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text('Не удалось войти'),
+        ),
+      );
+      return;
+    }
+
+    const storage = FlutterSecureStorage();
+    await storage.write(
+      key: 'access_token',
+      value: tokens['access_token']
+    );
+    await storage.write(
+      key: 'refresh_token',
+      value: tokens['refresh_token']
+    );
+
+    authProvider.changeAuthStatus();
+    Navigator.pop(context);
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -30,12 +76,8 @@ class Login extends StatelessWidget {
               ),
               TextFormField(
                 controller: loginProvider.emailController,
-                validator: (email) {
-                  if (email == null || email.isEmpty) {
-                    return 'Такого пользователя не существует';
-                  } else {
-                    return null;
-                  }
+                validator: (String? email) {
+                  emailValidator(email);
                 },
                 decoration: const InputDecoration(
                   labelText: 'Эл. почта',
@@ -48,23 +90,7 @@ class Login extends StatelessWidget {
                 text: 'Войти',
                 margin: const EdgeInsets.only(top: 20.0),
                 onPressed: () async {
-                  if (
-                    !authProvider.loginFormKey.currentState!.validate()
-                  ) return;
-                  final tokens = await context.read<LoginProvider>().login(
-                    loginProvider.emailController.text,
-                    loginProvider.passwordController.text,
-                  );
-                  if (tokens == null) {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      const SnackBar(
-                        content: Text('Не удалось войти'),
-                      ),
-                    );
-                    return;
-                  }
-                  authProvider.changeAuthStatus();
-                  Navigator.pop(context);
+                  await handleLogin(context, authProvider, loginProvider);
                 },
               ),
               Expanded(

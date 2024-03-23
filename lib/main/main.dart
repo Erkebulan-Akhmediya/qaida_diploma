@@ -13,15 +13,14 @@ class Main extends StatelessWidget {
         onPressed: () async {
           final location = await context.read<GeolocationProvider>().getLocation();
           final user = await context.read<UserProvider>().getMe();
-          print(location);
-          print(user['_id']);
-          await context.read<GeolocationProvider>().connect();
-          // context.read<GeolocationProvider>().sendLocation(
-          //   user['_id'],
-          //   location['lat'],
-          //   location['lon'],
-          // );
-          // await context.read<GeolocationProvider>().close();
+
+          context.read<GeolocationProvider>().connect();
+          context.read<GeolocationProvider>().sendLocation(
+            user['_id'],
+            location['lat'],
+            location['lon'],
+          );
+          context.read<GeolocationProvider>().close();
         },
         child: const Text('Send Location'),
       ),

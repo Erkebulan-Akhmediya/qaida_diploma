@@ -17,8 +17,8 @@ class Auth extends StatelessWidget {
       ),
       body: IndexedStack(
         index: authProvider.authPageIndex,
-        children: <Widget>[
-          const Login(),
+        children: const <Widget>[
+          Login(),
           Registration(),
         ],
       ),
