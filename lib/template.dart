@@ -1,56 +1,38 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 import 'package:qaida/categories/categories.dart';
 import 'package:qaida/contacts/contacts.dart';
 import 'package:qaida/main/main.dart';
 import 'package:qaida/profile/profile.dart';
-import 'package:qaida/providers/template.dart';
 
 class Template extends StatelessWidget {
   const Template({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final templateProvider = context.watch<TemplateProvider>();
-    String pageTitle = templateProvider.getTemplatePageTitle;
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(pageTitle),
-        centerTitle: true,
-      ),
-      body: IndexedStack(
-        index: templateProvider.templatePageIndex,
-        children: const <Widget>[
-          Main(),
-          Categories(),
-          Contacts(),
-          Profile(),
-        ],
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.fixed,
-        currentIndex: templateProvider.templatePageIndex,
-        onTap: (index) {
-          context.read<TemplateProvider>().changeTemplatePage(index);
-        },
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Главная',
+    return const DefaultTabController(
+      length: 4,
+      child: Scaffold(
+        backgroundColor: Color(0xFFF2F3F6),
+        body: TabBarView(
+          children: [
+            Main(),
+            Categories(),
+            Contacts(),
+            Profile(),
+          ],
+        ),
+        bottomNavigationBar: Material(
+          color: Colors.white,
+          child: TabBar(
+            labelColor: Colors.blue,
+            tabs: [
+              Tab(icon: Icon(Icons.home), text: 'Главная',),
+              Tab(icon: Icon(Icons.list), text: 'Категории',),
+              Tab(icon: Icon(Icons.people), text: 'Контакты',),
+              Tab(icon: Icon(Icons.person), text: 'Профиль',),
+            ],
           ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.list),
-            label: 'Категории',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.people),
-            label: 'Контакты',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: 'Профиль',
-          ),
-        ],
+        ),
       ),
     );
   }
