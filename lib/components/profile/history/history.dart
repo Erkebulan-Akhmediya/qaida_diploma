@@ -9,15 +9,23 @@ class History extends StatelessWidget {
     return Container(
       color: const Color(0xFFFAFAFA),
       padding: const EdgeInsets.all(20.0),
-      margin: const EdgeInsets.only(top: 20.0),
+      margin: const EdgeInsets.only(top: 30.0),
+      height: 200,
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           const Text('Вы смотрели'),
-          ListView(
-            scrollDirection: Axis.horizontal,
-            children: const [
-              Place(),
-            ],
+          Expanded(
+            child: ListView(
+              scrollDirection: Axis.horizontal,
+              children: const [
+                Place(),
+                Place(),
+                Place(),
+                Place(),
+                Place(),
+              ],
+            ),
           ),
         ],
       ),

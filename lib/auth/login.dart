@@ -77,7 +77,7 @@ class Login extends StatelessWidget {
               TextFormField(
                 controller: loginProvider.emailController,
                 validator: (String? email) {
-                  emailValidator(email);
+                  return emailValidator(email);
                 },
                 decoration: const InputDecoration(
                   labelText: 'Эл. почта',
