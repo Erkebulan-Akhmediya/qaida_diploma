@@ -3,6 +3,7 @@ import 'package:qaida/components/profile/app_bar/auth_profile_bar.dart';
 import 'package:qaida/components/profile/forward_button.dart';
 import 'package:qaida/components/profile/history/history.dart';
 import 'package:qaida/components/profile/light_container.dart';
+import 'package:qaida/profile/settings.dart';
 
 class Authorized extends StatelessWidget {
   const Authorized({super.key});
@@ -25,7 +26,7 @@ class Authorized extends StatelessWidget {
           LightContainer(
             bottomMargin: true,
             children: [
-              ForwardButton(text: 'Настройки',),
+              ForwardButton(text: 'Настройки', page: Settings(),),
               ForwardButton(text: 'О нас',),
               ForwardButton(text: 'Помощь',),
             ],
