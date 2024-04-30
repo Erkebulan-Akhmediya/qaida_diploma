@@ -6,9 +6,9 @@ import 'package:qaida/interests/loader.dart';
 import 'package:qaida/auth/validators.dart';
 import 'package:qaida/components/full_width_button.dart';
 import 'package:qaida/components/password.dart';
-import 'package:qaida/providers/auth.dart';
-import 'package:qaida/providers/login.dart';
-import 'package:qaida/providers/registration.dart';
+import 'package:qaida/providers/auth.provider.dart';
+import 'package:qaida/providers/login.provider.dart';
+import 'package:qaida/providers/registration.provider.dart';
 
 class Registration extends StatelessWidget {
   const Registration({super.key});

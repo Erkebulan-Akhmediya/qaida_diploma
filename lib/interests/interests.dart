@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:provider/provider.dart';
 import 'package:qaida/components/interest_item.dart';
-import 'package:qaida/providers/interests.dart';
-import 'package:qaida/providers/template.dart';
+import 'package:qaida/providers/interests.provider.dart';
+import 'package:qaida/providers/template.provider.dart';
 
 class Interests extends StatelessWidget {
   const Interests({super.key});

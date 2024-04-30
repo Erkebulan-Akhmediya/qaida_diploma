@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:qaida/providers/interests.dart';
+import 'package:qaida/providers/interests.provider.dart';
 
 class InterestSubcategories extends StatelessWidget {
   final int index;

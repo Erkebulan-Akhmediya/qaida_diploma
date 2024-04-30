@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:qaida/interests/interests.dart';
-import 'package:qaida/providers/interests.dart';
+import 'package:qaida/providers/interests.provider.dart';
 
 class Loader extends StatelessWidget {
   const Loader({super.key});

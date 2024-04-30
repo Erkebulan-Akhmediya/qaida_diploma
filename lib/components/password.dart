@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:qaida/providers/auth.dart';
+import 'package:qaida/providers/auth.provider.dart';
 
 class Password extends StatelessWidget {
   final TextEditingController? controller;

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:qaida/categories/categories.dart';
 import 'package:qaida/contacts/contacts.dart';
-import 'package:qaida/main/main.dart';
+import 'package:qaida/home/home.dart';
 import 'package:qaida/profile/profile.dart';
 
 class Template extends StatelessWidget {

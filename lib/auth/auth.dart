@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:qaida/auth/login.dart';
 import 'package:qaida/auth/registration.dart';
-import 'package:qaida/providers/auth.dart';
+import 'package:qaida/providers/auth.provider.dart';
 
 class Auth extends StatelessWidget {
   const Auth({super.key});

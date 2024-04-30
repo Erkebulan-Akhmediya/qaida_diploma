@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:qaida/profile/authorized.dart';
 import 'package:qaida/profile/unauthorized.dart';
-import 'package:qaida/providers/auth.dart';
+import 'package:qaida/providers/auth.provider.dart';
 
 class Profile extends StatelessWidget {
   const Profile({super.key});

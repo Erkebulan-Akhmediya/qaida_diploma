@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:qaida/providers/auth.dart';
-import 'package:qaida/providers/geolocation.dart';
-import 'package:qaida/providers/interests.dart';
-import 'package:qaida/providers/login.dart';
-import 'package:qaida/providers/registration.dart';
-import 'package:qaida/providers/template.dart';
-import 'package:qaida/providers/user.dart';
+import 'package:qaida/providers/auth.provider.dart';
+import 'package:qaida/providers/geolocation.provider.dart';
+import 'package:qaida/providers/interests.provider.dart';
+import 'package:qaida/providers/login.provider.dart';
+import 'package:qaida/providers/registration.provider.dart';
+import 'package:qaida/providers/template.provider.dart';
+import 'package:qaida/providers/user.provider.dart';
 import 'package:qaida/template.dart';
 
 void main() {
