@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:qaida/components/interest_icon.dart';
-import 'package:qaida/components/interest_subcategories.dart';
-import 'package:qaida/components/interest_text.dart';
+import 'package:qaida/components/interest/interest_icon.dart';
+import 'package:qaida/components/interest/interest_subcategories.dart';
+import 'package:qaida/components/interest/interest_text.dart';
 import 'package:qaida/providers/interests.provider.dart';
 
 class InterestItem extends StatelessWidget {
