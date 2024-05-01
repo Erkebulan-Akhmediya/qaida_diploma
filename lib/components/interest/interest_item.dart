@@ -19,15 +19,11 @@ class InterestItem extends StatelessWidget {
         crossAxisAlignment: interestProvider.openItems[index] ? CrossAxisAlignment.start : CrossAxisAlignment.center,
         children: <Widget>[
           GestureDetector(
-            onTap: () {
-              context.read<InterestsProvider>().changeOpen(index);
-            },
+            onTap: () { context.read<InterestsProvider>().changeOpen(index); },
             child: InterestIcon(index: index),
           ),
           GestureDetector(
-            onTap: () {
-              context.read<InterestsProvider>().changeSelect(index);
-            },
+            onTap: () { context.read<InterestsProvider>().changeSelect(index); },
             child: interestProvider.openItems[index] ?
               InterestSubcategories(index: index) :
               InterestText(index: index),

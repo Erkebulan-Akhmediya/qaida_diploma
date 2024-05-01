@@ -11,29 +11,27 @@ class InterestIcon extends StatelessWidget {
   Widget build(BuildContext context) {
     final interestProvider = context.watch<InterestsProvider>();
     return CustomPaint(
-      painter: HexagonPainter(),
+      painter: HexagonPainter(interestProvider.selectedItems[index]),
       child: Padding(
         padding: const EdgeInsets.all(5.0),
         child: interestProvider.openItems[index] ?
-          const Icon(
-            Icons.keyboard_arrow_up,
-            size: 50,
-          ) :
-          const Icon(
-            Icons.menu,
-            size: 50,
-          ),
+          const Icon(Icons.keyboard_arrow_up, size: 50,) :
+          const Icon(Icons.menu, size: 50,),
       ),
     );
   }
 }
 
 class HexagonPainter extends CustomPainter {
+  bool isSelected;
+
+  HexagonPainter(this.isSelected);
+
   @override
   void paint(Canvas canvas, Size size) {
     final paint = Paint()
-      ..color = Colors.black
-      ..style = PaintingStyle.stroke
+      ..color = isSelected ? Colors.white : Colors.black
+      ..style = isSelected ? PaintingStyle.fill : PaintingStyle.stroke
       ..strokeWidth = 2.0;
     final path = Path()
       ..moveTo(size.width / 2, 0)
@@ -43,6 +41,8 @@ class HexagonPainter extends CustomPainter {
       ..lineTo(0, size.height * 3 / 4)
       ..lineTo(0, size.height / 4)
       ..close();
+    double elevation = isSelected ? 5.0 : 0.0;
+    canvas.drawShadow(path, Colors.black, elevation, false);
     canvas.drawPath(path, paint);
   }
 

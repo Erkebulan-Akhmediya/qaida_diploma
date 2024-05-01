@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:qaida/auth/auth.dart';
+import 'package:qaida/views/auth/auth.dart';
 import 'package:qaida/components/full_width_button.dart';
 
 class Unauthorized extends StatelessWidget {

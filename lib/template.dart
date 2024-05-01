@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:qaida/categories/categories.dart';
-import 'package:qaida/contacts/contacts.dart';
-import 'package:qaida/home/home.dart';
-import 'package:qaida/profile/profile.dart';
+import 'package:qaida/views/categories.dart';
+import 'package:qaida/views/contacts.dart';
+import 'package:qaida/views/home.dart';
+import 'package:qaida/views/profile/profile.dart';
 
 class Template extends StatelessWidget {
   const Template({super.key});

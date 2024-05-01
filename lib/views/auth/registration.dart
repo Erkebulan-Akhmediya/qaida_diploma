@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:provider/provider.dart';
+import 'package:qaida/components/header.dart';
 import 'package:qaida/components/registration_footer.dart';
-import 'package:qaida/interests/loader.dart';
-import 'package:qaida/auth/validators.dart';
+import 'package:qaida/views/interests.dart';
+import 'package:qaida/components/auth/validators.dart';
 import 'package:qaida/components/full_width_button.dart';
 import 'package:qaida/components/password.dart';
 import 'package:qaida/providers/auth.provider.dart';
+import 'package:qaida/providers/interests.provider.dart';
 import 'package:qaida/providers/login.provider.dart';
 import 'package:qaida/providers/registration.provider.dart';
 
@@ -17,7 +19,7 @@ class Registration extends StatelessWidget {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => const Loader(),
+        builder: (context) => const Interests(),
       ),
     );
   }
@@ -54,6 +56,7 @@ class Registration extends StatelessWidget {
         key: 'refresh_token',
         value: response['refresh_token']
       );
+      await context.read<InterestsProvider>().fetchInterests();
       navToInterest(context);
     } catch(e) {
       context.read<AuthProvider>().changeAuthPage();
@@ -71,13 +74,7 @@ class Registration extends StatelessWidget {
             mainAxisAlignment: MainAxisAlignment.start,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
-              const Text(
-                'Введите данные',
-                style: TextStyle(
-                  fontSize: 20.0,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
+              const Header(text: 'Введите данные', fontSize: 20.0,),
               TextFormField(
                 controller: registrationProvider.emailController,
                 decoration: const InputDecoration(
@@ -95,12 +92,9 @@ class Registration extends StatelessWidget {
                   top: 15.0,
                   bottom: 7.0,
                 ),
-                child: const Text(
-                  'Пароль должен содержать следущее',
-                  style: TextStyle(
-                    fontSize: 15.0,
-                    fontWeight: FontWeight.bold,
-                  ),
+                child: const Header(
+                  text: 'Пароль должен содержать следущее',
+                  fontSize: 15.0,
                 ),
               ),
               const Validators(),

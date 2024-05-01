@@ -3,7 +3,7 @@ import 'package:qaida/components/profile/app_bar/auth_profile_bar.dart';
 import 'package:qaida/components/profile/forward_button.dart';
 import 'package:qaida/components/profile/history/history.dart';
 import 'package:qaida/components/profile/light_container.dart';
-import 'package:qaida/profile/settings.dart';
+import 'package:qaida/views/profile/settings.dart';
 
 class Authorized extends StatelessWidget {
   const Authorized({super.key});
