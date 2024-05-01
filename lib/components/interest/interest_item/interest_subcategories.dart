@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:provider/provider.dart';
-import 'package:qaida/components/interest/subcategories_container.dart';
+import 'package:qaida/components/interest/interest_item/subcategories_container.dart';
 import 'package:qaida/providers/interests.provider.dart';
 
 class InterestSubcategories extends StatelessWidget {

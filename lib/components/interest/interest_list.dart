@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:qaida/components/interest/interest_item.dart';
+import 'package:qaida/components/interest/interest_item/interest_item.dart';
 import 'package:qaida/providers/interests.provider.dart';
 
 class InterestList extends StatelessWidget {

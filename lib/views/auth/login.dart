@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:provider/provider.dart';
 import 'package:qaida/components/full_width_button.dart';
-import 'package:qaida/components/password.dart';
+import 'package:qaida/components/auth/password.dart';
 import 'package:qaida/providers/auth.provider.dart';
 import 'package:qaida/providers/login.provider.dart';
 import 'package:qaida/providers/user.provider.dart';
