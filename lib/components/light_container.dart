@@ -1,25 +1,20 @@
 import 'package:flutter/material.dart';
-import 'package:qaida/components/profile/forward_button.dart';
+import 'package:qaida/components/forward_button.dart';
 
 class LightContainer extends StatelessWidget {
   final List<ForwardButton> children;
-  final bool bottomMargin;
+  final EdgeInsetsGeometry margin;
 
   const LightContainer({
     super.key,
     required this.children,
-    this.bottomMargin = false,
+    this.margin = const EdgeInsets.all(0),
   });
 
   @override
   Widget build(BuildContext context) {
     return Container(
-      margin: EdgeInsets.only(
-        top: 20,
-        left: 20,
-        right: 20,
-        bottom: (bottomMargin ? 20 : 0),
-      ),
+      margin: margin,
       padding: const EdgeInsets.only(top: 5, bottom: 5, left: 15, right: 15),
       decoration: BoxDecoration(
         color: const Color(0xFFFAFAFA),
@@ -31,7 +26,7 @@ class LightContainer extends StatelessWidget {
             ...[
               children[i],
               if (i != children.length-1)
-                const Divider(height: 0, color: Colors.blue,),
+                const Divider(height: 0, color: Color(0xFF1E3050),),
             ]
         ],
       ),

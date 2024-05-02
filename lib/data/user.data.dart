@@ -4,6 +4,9 @@ class User {
   String? surname;
   String email;
   List favorites;
+  String gender;
+  String? messengerOne;
+  String? messengerTwo;
 
   User({
     required this.id,
@@ -11,6 +14,9 @@ class User {
     required this.surname,
     required this.email,
     required this.favorites,
+    required this.gender,
+    required this.messengerOne,
+    required this.messengerTwo,
   });
 
   factory User.fromMap(map) {
@@ -19,7 +25,10 @@ class User {
       name: map['name'],
       surname: map['surname'],
       email: map['email'],
-      favorites: map['favorites']
+      favorites: map['favorites'],
+      gender: map['gender'],
+      messengerOne: map['messenger_one'],
+      messengerTwo: map['messenger_two']
     );
   }
 }
