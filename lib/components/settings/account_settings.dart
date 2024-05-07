@@ -4,7 +4,6 @@ import 'package:provider/provider.dart';
 import 'package:qaida/components/forward_button.dart';
 import 'package:qaida/components/light_container.dart';
 import 'package:qaida/providers/auth.provider.dart';
-import 'package:qaida/views/profile/profile.dart';
 
 class AccountSettings extends StatelessWidget {
   const AccountSettings({super.key});

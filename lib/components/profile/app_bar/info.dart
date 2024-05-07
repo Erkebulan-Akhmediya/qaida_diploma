@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:qaida/components/profile/app_bar/info_button.dart';
 import 'package:qaida/providers/user.provider.dart';
+import 'package:qaida/views/profile/reviews.dart';
 
 class Info extends StatelessWidget {
   const Info({super.key});
@@ -22,7 +23,12 @@ class Info extends StatelessWidget {
           text: 'Посетил(-а)',
           count: visitedCount,
         ),
-        const InfoButton(icon: Icons.message, text: 'Отзывы', count: -1,),
+        const InfoButton(
+          icon: Icons.message,
+          text: 'Отзывы',
+          count: -1,
+          page: Reviews(),
+        ),
       ],
     );
   }

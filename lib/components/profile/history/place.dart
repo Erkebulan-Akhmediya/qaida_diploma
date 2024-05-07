@@ -20,7 +20,7 @@ class Place extends StatelessWidget {
             height: 90,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10.0),
-              image:  const DecorationImage(
+              image: const DecorationImage(
                 image: AssetImage('assets/sample.jpg'),
                 fit: BoxFit.cover,
               ),
