@@ -10,6 +10,7 @@ import 'package:qaida/providers/user.provider.dart';
 import 'package:qaida/template.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(
     MultiProvider(
       providers: [
