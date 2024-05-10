@@ -17,12 +17,15 @@ class ReviewPlaceListItem extends StatelessWidget {
               children: [
                 Image.asset('assets/sample.jpg', width: 100),
                 Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const Text('Хан Шатыр'),
                     const Text('Проспект Туран, 37'),
                     RatingBar.builder(
-                      itemBuilder: (BuildContext context, _) =>
-                          const Icon(Icons.star, color: Colors.yellow,),
+                      itemBuilder: (BuildContext context, _) => const Icon(
+                        Icons.star_rounded,
+                        color: Colors.yellow,
+                      ),
                       onRatingUpdate: (double value) {},
                     ),
                   ],

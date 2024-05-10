@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:qaida/components/profile/app_bar/auth_profile_bar.dart';
 import 'package:qaida/components/forward_button.dart';
-import 'package:qaida/components/profile/history/history.dart';
+import 'package:qaida/components/profile/history.dart';
 import 'package:qaida/components/light_container.dart';
 import 'package:qaida/views/profile/settings.dart';
 

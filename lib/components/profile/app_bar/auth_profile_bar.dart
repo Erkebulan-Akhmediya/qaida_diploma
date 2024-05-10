@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:qaida/components/profile/app_bar/app_bar_button.dart';
 import 'package:qaida/components/profile/app_bar/info.dart';
-import 'package:qaida/components/profile/app_bar/search.dart';
+import 'package:qaida/components/search.dart';
 
 class AuthProfileBar extends StatelessWidget implements PreferredSizeWidget  {
   const AuthProfileBar({super.key});

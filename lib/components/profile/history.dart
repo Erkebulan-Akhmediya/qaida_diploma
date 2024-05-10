@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:qaida/components/profile/history/place.dart';
+import 'package:qaida/components/place.dart';
 
 class History extends StatelessWidget {
   const History({super.key});
