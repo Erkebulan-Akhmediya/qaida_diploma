@@ -23,7 +23,6 @@ class ReviewProvider extends ChangeNotifier {
       visited.where((data) => data['status'] == 'PROCESSING'),
     );
     this.processing = processing.map((data) => data['place_id']).toList();
-
-    print(this.processing);
+    notifyListeners();
   }
 }
