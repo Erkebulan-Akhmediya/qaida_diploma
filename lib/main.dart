@@ -5,6 +5,7 @@ import 'package:qaida/providers/geolocation.provider.dart';
 import 'package:qaida/providers/interests.provider.dart';
 import 'package:qaida/providers/login.provider.dart';
 import 'package:qaida/providers/registration.provider.dart';
+import 'package:qaida/providers/review.provider.dart';
 import 'package:qaida/providers/template.provider.dart';
 import 'package:qaida/providers/user.provider.dart';
 import 'package:qaida/template.dart';
@@ -14,27 +15,14 @@ void main() {
   runApp(
     MultiProvider(
       providers: [
-        ChangeNotifierProvider<AuthProvider>(
-          create: (context) => AuthProvider(),
-        ),
-        ChangeNotifierProvider<TemplateProvider>(
-          create: (context) => TemplateProvider(),
-        ),
-        ChangeNotifierProvider<InterestsProvider>(
-          create: (context) => InterestsProvider(),
-        ),
-        ChangeNotifierProvider<RegistrationProvider>(
-          create: (context) => RegistrationProvider(),
-        ),
-        ChangeNotifierProvider<LoginProvider>(
-          create: (context) => LoginProvider(),
-        ),
-        ChangeNotifierProvider<GeolocationProvider>(
-          create: (context) => GeolocationProvider(),
-        ),
-        ChangeNotifierProvider<UserProvider>(
-          create: (context) => UserProvider(),
-        ),
+        ChangeNotifierProvider(create: (context) => AuthProvider()),
+        ChangeNotifierProvider(create: (context) => TemplateProvider()),
+        ChangeNotifierProvider(create: (context) => InterestsProvider()),
+        ChangeNotifierProvider(create: (context) => RegistrationProvider()),
+        ChangeNotifierProvider(create: (context) => LoginProvider()),
+        ChangeNotifierProvider(create: (context) => GeolocationProvider()),
+        ChangeNotifierProvider(create: (context) => UserProvider()),
+        ChangeNotifierProvider(create: (context) => ReviewProvider()),
       ],
       child: const MyApp(),
     ),
