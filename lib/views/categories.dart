@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:qaida/components/all_button.dart';
 import 'package:qaida/components/categories/category_preview.dart';
-import 'package:qaida/components/place.dart';
+import 'package:qaida/components/place_card/place_card.dart';
 import 'package:qaida/components/search.dart';
 import 'package:qaida/providers/category.provider.dart';
 
@@ -50,9 +50,9 @@ class Categories extends StatelessWidget {
                   child: ListView(
                     scrollDirection: Axis.horizontal,
                     children: const [
-                      Place(),
-                      Place(),
-                      Place(),
+                      PlaceCard(),
+                      PlaceCard(),
+                      PlaceCard(),
                     ],
                   ),
                 ),

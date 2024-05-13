@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:qaida/components/place.dart';
+import 'package:qaida/components/place_card/place_card.dart';
 import 'package:qaida/components/search.dart';
 import 'package:qaida/providers/recommendation.provider.dart';
 import 'package:qaida/providers/user.provider.dart';
@@ -49,7 +49,7 @@ class Main extends StatelessWidget {
                       crossAxisCount: 2,
                       children: [
                         for (var place in places)
-                          Place(place: place,),
+                          PlaceCard(place: place,),
                       ],
                     ),
                   ),

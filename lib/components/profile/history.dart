@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:qaida/components/place.dart';
+import 'package:qaida/components/place_card/place_card.dart';
 
 class History extends StatelessWidget {
   const History({super.key});
@@ -19,11 +19,11 @@ class History extends StatelessWidget {
             child: ListView(
               scrollDirection: Axis.horizontal,
               children: const [
-                Place(),
-                Place(),
-                Place(),
-                Place(),
-                Place(),
+                PlaceCard(),
+                PlaceCard(),
+                PlaceCard(),
+                PlaceCard(),
+                PlaceCard(),
               ],
             ),
           ),

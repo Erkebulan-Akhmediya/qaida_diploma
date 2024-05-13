@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:qaida/components/all_button.dart';
-import 'package:qaida/components/place.dart';
+import 'package:qaida/components/place_card/place_card.dart';
 import 'package:qaida/providers/category.provider.dart';
 
 class CategoryPreview extends StatelessWidget {
@@ -47,7 +47,7 @@ class CategoryPreview extends StatelessWidget {
                   crossAxisCount: 2,
                   children: [
                     for (int i = 0; i < 6; i++)
-                      Place(
+                      PlaceCard(
                         place: Map.from(snapshot.data![i]),
                       ),
                   ],
