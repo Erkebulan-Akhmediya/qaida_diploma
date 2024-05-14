@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:qaida/components/place/place_image.dart';
+import 'package:qaida/components/place/place_rating.dart';
 import 'package:qaida/providers/place.provider.dart';
 
 class PlaceHeader extends StatelessWidget {
@@ -30,11 +31,9 @@ class PlaceHeader extends StatelessWidget {
                   thickness: 1,
                 ),
                 Text(place?['title']),
-                Row(
-                  children: [
-                    for (int i = 0; i < 5; i++) const Icon(Icons.star_rounded),
-                    const Text('-1 отзывов'),
-                  ],
+                PlaceRating(
+                  rating: double.parse(place?['score_2gis']['\$numberDecimal']),
+                  reviewCount: List.from(place?['score']).length,
                 ),
               ],
             ),

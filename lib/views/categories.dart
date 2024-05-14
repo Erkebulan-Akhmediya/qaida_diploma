@@ -15,7 +15,8 @@ class Categories extends StatelessWidget {
     return FutureBuilder(
       future: context.read<CategoryProvider>().getCategories(),
       builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.waiting) {
+        if (snapshot.connectionState == ConnectionState.waiting &&
+            categories.isEmpty) {
           return const Center(child: CircularProgressIndicator());
         } else if (snapshot.hasError) {
           return const Center(child: Text('Error'));
@@ -57,7 +58,7 @@ class Categories extends StatelessWidget {
                   ),
                 ),
                 for (int i = 0; i < categories.length; i++)
-                  CategoryPreview(index: i,),
+                  CategoryPreview(index: i),
               ],
             ),
           );
