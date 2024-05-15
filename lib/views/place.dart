@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:qaida/components/place/might_be_interesting.dart';
-import 'package:qaida/components/place/place_description.dart';
 import 'package:qaida/components/place/place_header.dart';
 import 'package:qaida/components/search.dart';
 import 'package:qaida/providers/place.provider.dart';
@@ -36,7 +35,6 @@ class Place extends StatelessWidget {
               children: const [
                 PlaceHeader(),
                 MightBeInteresting(),
-                PlaceDescription(),
               ],
             );
           }
