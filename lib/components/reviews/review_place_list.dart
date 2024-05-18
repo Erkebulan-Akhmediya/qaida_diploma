@@ -12,8 +12,8 @@ class ReviewPlaceList extends StatelessWidget {
     return Expanded(
       child: ListView(
         children: [
-          for (int i = 0; i < reviewPlaceList.length; i++)
-            ReviewPlaceListItem(index: i),
+          for (var place in reviewPlaceList)
+            ReviewPlaceListItem(key: Key(place['_id']),  place: place),
         ],
       ),
     );
