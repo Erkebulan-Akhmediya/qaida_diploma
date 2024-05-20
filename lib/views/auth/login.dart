@@ -5,7 +5,6 @@ import 'package:qaida/components/full_width_button.dart';
 import 'package:qaida/components/auth/password.dart';
 import 'package:qaida/providers/auth.provider.dart';
 import 'package:qaida/providers/login.provider.dart';
-import 'package:qaida/providers/user.provider.dart';
 
 class Login extends StatelessWidget {
   const Login({super.key});
@@ -22,7 +21,6 @@ class Login extends StatelessWidget {
     BuildContext context,
     AuthProvider authProvider,
     LoginProvider loginProvider,
-    UserProvider userProvider,
   ) async {
     if (
       !authProvider.loginFormKey.currentState!.validate()
@@ -52,8 +50,6 @@ class Login extends StatelessWidget {
       value: tokens['refresh_token']
     );
 
-    await userProvider.getMe();
-    await userProvider.fetchVisitedCount();
     authProvider.changeAuthStatus();
     Navigator.pop(context);
   }
@@ -62,7 +58,6 @@ class Login extends StatelessWidget {
   Widget build(BuildContext context) {
     final authProvider = context.watch<AuthProvider>();
     final loginProvider = context.watch<LoginProvider>();
-    final userProvider = context.watch<UserProvider>();
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(20.0),
@@ -95,7 +90,7 @@ class Login extends StatelessWidget {
                 text: 'Войти',
                 margin: const EdgeInsets.only(top: 20.0),
                 onPressed: () async {
-                  await handleLogin(context, authProvider, loginProvider, userProvider);
+                  await handleLogin(context, authProvider, loginProvider);
                 },
               ),
               Expanded(

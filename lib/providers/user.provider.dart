@@ -7,7 +7,8 @@ import 'package:qaida/data/user.data.dart';
 
 class UserProvider extends ChangeNotifier {
   late User myself;
-  late int visitedCount;
+  int visitedCount = 0;
+  int reviewCount = 0;
 
   Future<void> getMe() async {
     const storage = FlutterSecureStorage();
@@ -17,7 +18,7 @@ class UserProvider extends ChangeNotifier {
       Uri.parse('http://10.0.2.2:8080/api/user/me'),
       headers: {
         'Authorization': 'Bearer $token',
-      }
+      },
     );
     myself = User.fromMap(jsonDecode(response.body));
   }
@@ -32,6 +33,9 @@ class UserProvider extends ChangeNotifier {
         'Authorization': 'Bearer $token',
       },
     );
-    visitedCount = List.from(jsonDecode(response.body)).length;
+    List visited = List.from(jsonDecode(response.body));
+    visitedCount = visited.length;
+    reviewCount =
+        visited.map((visit) => visit['status'] == 'VISITED').toList().length;
   }
 }

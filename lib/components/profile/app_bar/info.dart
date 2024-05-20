@@ -10,7 +10,6 @@ class Info extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final user = context.watch<UserProvider>().myself;
-    final visitedCount = context.watch<UserProvider>().visitedCount;
     return Row(
       children: [
         InfoButton(
@@ -21,13 +20,13 @@ class Info extends StatelessWidget {
         InfoButton(
           icon: Icons.place,
           text: 'Посетил(-а)',
-          count: visitedCount,
+          count: context.watch<UserProvider>().visitedCount,
         ),
-        const InfoButton(
+        InfoButton(
           icon: Icons.message,
           text: 'Отзывы',
-          count: -1,
-          page: Reviews(),
+          count: context.watch<UserProvider>().reviewCount,
+          page: const Reviews(),
         ),
       ],
     );

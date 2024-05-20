@@ -6,6 +6,7 @@ import 'package:http/http.dart' as http;
 
 class ReviewProvider extends ChangeNotifier {
   List processing = [];
+  int reviewCount = 0;
 
   Future getProcessingPlaces() async {
     String? token =
@@ -20,12 +21,15 @@ class ReviewProvider extends ChangeNotifier {
     List processing = List.from(
       visited.where((data) => data['status'] == 'PROCESSING'),
     );
-    this.processing = processing.map((data) => data['place_id']).toList();
+    this.processing = processing.map((data) {
+      Map result = data['place_id'];
+      result['visited_id'] = data['_id'];
+      return result;
+    }).toList();
     notifyListeners();
   }
 
-  Future sendRating(String placeId, int rating) async {
-    print(placeId);
+  Future sendRating(String visitedId, String placeId, int rating) async {
     try {
       String? token =
           await const FlutterSecureStorage().read(key: 'access_token');
@@ -43,8 +47,8 @@ class ReviewProvider extends ChangeNotifier {
         }),
       );
 
-      http.Response response = await http.put(
-        Uri.parse('http://10.0.2.2:8080/api/place/visited/$placeId'),
+      await http.put(
+        Uri.parse('http://10.0.2.2:8080/api/place/visited/$visitedId'),
         headers: {
           'Authorization': 'Bearer $token',
           'Content-Type': 'application/json',

@@ -6,6 +6,7 @@ import 'package:qaida/providers/review.provider.dart';
 
 class ReviewPlaceListItemDescription extends StatelessWidget {
   final String id;
+  final String visitedId;
   final String title;
   final String address;
 
@@ -14,6 +15,7 @@ class ReviewPlaceListItemDescription extends StatelessWidget {
     required this.id,
     required this.title,
     required this.address,
+    required this.visitedId,
   });
 
   @override
@@ -33,7 +35,7 @@ class ReviewPlaceListItemDescription extends StatelessWidget {
               try {
                 await context
                     .read<ReviewProvider>()
-                    .sendRating(id, value.toInt());
+                    .sendRating(visitedId, id, value.toInt());
               } catch (e) {
                 if (kDebugMode) print(e);
               }

@@ -21,6 +21,7 @@ class ReviewPlaceListItem extends StatelessWidget {
                 ReviewPlaceListItemImage(url: place['image']),
                 ReviewPlaceListItemDescription(
                   id: place['_id'],
+                  visitedId: place['visited_id'],
                   title: place['title'],
                   address: place['address'],
                 ),
