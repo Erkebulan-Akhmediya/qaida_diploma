@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:qaida/components/q_icon.dart';
+import 'package:qaida/components/q_text.dart';
+import 'package:qaida/providers/theme.provider.dart';
 
 class InfoButton extends StatelessWidget {
   final IconData icon;
@@ -18,29 +22,25 @@ class InfoButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       child: Container(
-        color: const Color(0xFFF2F3F6),
         margin: const EdgeInsets.all(10.0),
+        decoration: BoxDecoration(
+          color: context.watch<ThemeProvider>().darkWhite,
+          borderRadius: BorderRadius.circular(10.0),
+        ),
         child: TextButton(
           onPressed: () {
             if (page == null) return;
             Navigator.push(
               context,
-              MaterialPageRoute(
-                builder: (context) => page!,
-              ),
+              MaterialPageRoute(builder: (context) => page!),
             );
           },
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Icon(icon),
-              Text(text),
-              Text(
-                '$count места',
-                style: const TextStyle(
-                  fontSize: 10,
-                ),
-              ),
+              QIcon(icon: icon),
+              QText(text: text, weight: FontWeight.bold),
+              QText(text: '$count места', size: 10),
             ],
           ),
         ),

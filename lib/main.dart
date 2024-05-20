@@ -10,6 +10,7 @@ import 'package:qaida/providers/recommendation.provider.dart';
 import 'package:qaida/providers/registration.provider.dart';
 import 'package:qaida/providers/review.provider.dart';
 import 'package:qaida/providers/template.provider.dart';
+import 'package:qaida/providers/theme.provider.dart';
 import 'package:qaida/providers/user.provider.dart';
 import 'package:qaida/template.dart';
 
@@ -18,17 +19,18 @@ void main() {
   runApp(
     MultiProvider(
       providers: [
-        ChangeNotifierProvider(create: (context) => AuthProvider()),
-        ChangeNotifierProvider(create: (context) => TemplateProvider()),
-        ChangeNotifierProvider(create: (context) => InterestsProvider()),
-        ChangeNotifierProvider(create: (context) => RegistrationProvider()),
-        ChangeNotifierProvider(create: (context) => LoginProvider()),
-        ChangeNotifierProvider(create: (context) => GeolocationProvider()),
-        ChangeNotifierProvider(create: (context) => UserProvider()),
-        ChangeNotifierProvider(create: (context) => ReviewProvider()),
-        ChangeNotifierProvider(create: (context) => CategoryProvider()),
-        ChangeNotifierProvider(create: (context) => RecommendationProvider()),
-        ChangeNotifierProvider(create: (context) => PlaceProvider()),
+        ChangeNotifierProvider(create: (_) => AuthProvider()),
+        ChangeNotifierProvider(create: (_) => TemplateProvider()),
+        ChangeNotifierProvider(create: (_) => InterestsProvider()),
+        ChangeNotifierProvider(create: (_) => RegistrationProvider()),
+        ChangeNotifierProvider(create: (_) => LoginProvider()),
+        ChangeNotifierProvider(create: (_) => GeolocationProvider()),
+        ChangeNotifierProvider(create: (_) => UserProvider()),
+        ChangeNotifierProvider(create: (_) => ReviewProvider()),
+        ChangeNotifierProvider(create: (_) => CategoryProvider()),
+        ChangeNotifierProvider(create: (_) => RecommendationProvider()),
+        ChangeNotifierProvider(create: (_) => PlaceProvider()),
+        ChangeNotifierProvider(create: (_) => ThemeProvider()),
       ],
       child: const MyApp(),
     ),
@@ -41,10 +43,18 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Qaida',
-      home: Template(),
+      theme: ThemeData(
+        scaffoldBackgroundColor: context.watch<ThemeProvider>().darkWhite,
+        bottomNavigationBarTheme: BottomNavigationBarThemeData(
+          backgroundColor: context.watch<ThemeProvider>().darkWhite,
+          unselectedItemColor: const Color(0x66000000),
+          selectedItemColor: const Color(0x66000000),
+        ),
+      ),
+      home: const Template(),
     );
   }
 }

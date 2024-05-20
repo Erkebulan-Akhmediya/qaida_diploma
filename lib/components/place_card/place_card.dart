@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:qaida/components/place_card/place_card_image.dart';
+import 'package:qaida/components/q_text.dart';
 import 'package:qaida/providers/place.provider.dart';
 import 'package:qaida/views/place.dart';
 
@@ -36,32 +37,41 @@ class PlaceCard extends StatelessWidget {
       },
       child: Container(
         height: 90,
-        margin: const EdgeInsets.only(right: 10.0),
-        decoration: BoxDecoration(
+        margin: const EdgeInsets.all(10.0),
+        child: Material(
+          elevation: 5,
           color: Colors.white,
           borderRadius: BorderRadius.circular(10.0),
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            PlaceCardImage(place: place),
-            Text(
-              place == null ? 'Хан шатыр' : place!['title'],
-              overflow: TextOverflow.ellipsis,
-            ),
-            Text(
-              place == null
-                  ? 'Торгово-развлекательный центр'
-                  : categories(place!['category_id']),
-              style: const TextStyle(fontSize: 10),
-              overflow: TextOverflow.ellipsis,
-            ),
-            Text(
-              place == null ? 'Проспект Туран, 37' : place!['address'] ?? '',
-              style: const TextStyle(fontSize: 10),
-              overflow: TextOverflow.ellipsis,
-            ),
-          ],
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              PlaceCardImage(place: place),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    QText(
+                      text: place == null ? 'Хан шатыр' : place!['title'],
+                      weight: FontWeight.bold,
+                    ),
+                    QText(
+                      text: place == null
+                          ? 'Торгово-развлекательный центр'
+                          : categories(place!['category_id']),
+                      size: 10,
+                    ),
+                    QText(
+                      text: place == null
+                          ? 'Проспект Туран, 37'
+                          : place!['address'] ?? '',
+                      size: 10,
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

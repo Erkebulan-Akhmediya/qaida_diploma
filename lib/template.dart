@@ -21,17 +21,13 @@ class Template extends StatelessWidget {
             Profile(),
           ],
         ),
-        bottomNavigationBar: Material(
-          color: Colors.white,
-          child: TabBar(
-            labelColor: Colors.blue,
-            tabs: [
-              Tab(icon: Icon(Icons.home), text: 'Главная',),
-              Tab(icon: Icon(Icons.list), text: 'Категории',),
-              Tab(icon: Icon(Icons.people), text: 'Контакты',),
-              Tab(icon: Icon(Icons.person), text: 'Профиль',),
-            ],
-          ),
+        bottomNavigationBar: TabBar(
+          tabs: [
+            Tab(icon: Icon(Icons.home), text: 'Главная'),
+            Tab(icon: Icon(Icons.list), text: 'Категории'),
+            Tab(icon: Icon(Icons.people), text: 'Контакты'),
+            Tab(icon: Icon(Icons.person), text: 'Профиль'),
+          ],
         ),
       ),
     );

@@ -13,21 +13,21 @@ class Authorized extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final userProvider = context.watch<UserProvider>();
-    return Scaffold(
-      backgroundColor: const Color(0xFFF2F3F6),
-      appBar: const AuthProfileBar(),
-      body: FutureBuilder(
-        future: Future.wait([
-          userProvider.getMe(),
-          userProvider.fetchVisitedCount(),
-        ]),
-        builder: (context, snapshot) {
-          if (snapshot.connectionState == ConnectionState.waiting) {
-            return const Center(child: CircularProgressIndicator());
-          } else if (snapshot.hasError) {
-            return const Center(child: Text('Error'));
-          } else {
-            return ListView(
+    return FutureBuilder(
+      future: Future.wait([
+        userProvider.getMe(),
+        userProvider.fetchVisitedCount(),
+      ]),
+      builder: (context, snapshot) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
+          return const Center(child: CircularProgressIndicator());
+        } else if (snapshot.hasError) {
+          return const Center(child: CircularProgressIndicator());
+        } else {
+          return Scaffold(
+            backgroundColor: const Color(0xFFF2F3F6),
+            appBar: const AuthProfileBar(),
+            body: ListView(
               children: const [
                 History(),
                 LightContainer(
@@ -47,10 +47,10 @@ class Authorized extends StatelessWidget {
                   ],
                 ),
               ],
-            );
-          }
-        },
-      ),
+            ),
+          );
+        }
+      },
     );
   }
 }
