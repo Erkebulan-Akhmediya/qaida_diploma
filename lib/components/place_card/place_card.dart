@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:qaida/components/place_card/place_card_image.dart';
@@ -7,8 +9,9 @@ import 'package:qaida/views/place.dart';
 
 class PlaceCard extends StatelessWidget {
   final Map? place;
+  final bool encoded;
 
-  const PlaceCard({super.key, this.place});
+  const PlaceCard({super.key, this.place, this.encoded = false});
 
   String categories(List categories) {
     try {
@@ -20,6 +23,12 @@ class PlaceCard extends StatelessWidget {
     } catch (e) {
       return '';
     }
+  }
+
+  String decode(String ogStr) {
+    if (!encoded) return ogStr;
+    List<int> bytes = ogStr.codeUnits;
+    return utf8.decode(bytes);
   }
 
   @override
@@ -52,19 +61,19 @@ class PlaceCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     QText(
-                      text: place == null ? 'Хан шатыр' : place!['title'],
+                      text: place == null ? 'Хан шатыр' : decode(place!['title']),
                       weight: FontWeight.bold,
                     ),
                     QText(
                       text: place == null
                           ? 'Торгово-развлекательный центр'
-                          : categories(place!['category_id']),
+                          : decode(categories(place!['category_id'])),
                       size: 10,
                     ),
                     QText(
                       text: place == null
                           ? 'Проспект Туран, 37'
-                          : place!['address'] ?? '',
+                          : decode(place!['address'] ?? ''),
                       size: 10,
                     ),
                   ],

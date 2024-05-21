@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:qaida/components/forward_button.dart';
+import 'package:qaida/providers/theme.provider.dart';
 
 class LightContainer extends StatelessWidget {
   final List<ForwardButton> children;
@@ -17,7 +19,7 @@ class LightContainer extends StatelessWidget {
       margin: margin,
       padding: const EdgeInsets.only(top: 5, bottom: 5, left: 15, right: 15),
       decoration: BoxDecoration(
-        color: const Color(0xFFFAFAFA),
+        color: context.watch<ThemeProvider>().lightWhite,
         borderRadius: BorderRadius.circular(10.0),
       ),
       child: Column(

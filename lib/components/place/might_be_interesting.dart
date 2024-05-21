@@ -13,7 +13,7 @@ class MightBeInteresting extends StatelessWidget {
         children: [
           const Text('Вас могут заинтересовать'),
           SizedBox(
-            height: 170 ,
+            height: 200 ,
             child: ListView(
               scrollDirection: Axis.horizontal,
               children: [

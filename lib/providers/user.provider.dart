@@ -9,6 +9,7 @@ class UserProvider extends ChangeNotifier {
   late User myself;
   int visitedCount = 0;
   int reviewCount = 0;
+  List visitedPlaces = [];
 
   Future<void> getMe() async {
     const storage = FlutterSecureStorage();
@@ -34,6 +35,7 @@ class UserProvider extends ChangeNotifier {
       },
     );
     List visited = List.from(jsonDecode(response.body));
+    visitedPlaces = visited.map((visit) => visit['place_id']).toList();
     visitedCount = visited.length;
     reviewCount =
         visited.map((visit) => visit['status'] == 'VISITED').toList().length;

@@ -48,6 +48,9 @@ class MyApp extends StatelessWidget {
       title: 'Qaida',
       theme: ThemeData(
         scaffoldBackgroundColor: context.watch<ThemeProvider>().darkWhite,
+        appBarTheme: AppBarTheme(
+          backgroundColor: context.watch<ThemeProvider>().darkWhite,
+        ),
         bottomNavigationBarTheme: BottomNavigationBarThemeData(
           backgroundColor: context.watch<ThemeProvider>().darkWhite,
           unselectedItemColor: const Color(0x66000000),

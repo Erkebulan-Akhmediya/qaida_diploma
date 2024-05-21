@@ -9,9 +9,13 @@ class ReviewPlaceListItemImage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
-      width: 100,
-      height: 70,
+    return Container(
+      width: 120,
+      height: 80,
+      decoration: BoxDecoration(
+        borderRadius: BorderRadius.circular(10.0),
+      ),
+      margin: const EdgeInsets.only(left: 15.0, right: 15.0),
       child: FutureBuilder(
         future: context.read<TemplateProvider>().isValidImgUrl(url),
         builder: (context, snapshot) {

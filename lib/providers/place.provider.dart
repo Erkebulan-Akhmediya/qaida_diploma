@@ -18,6 +18,7 @@ class PlaceProvider extends ChangeNotifier {
         Uri.parse('http://10.0.2.2:8080/api/place/place/$id'),
       );
       place = Map.from(jsonDecode(response.body));
+      notifyListeners();
     } catch (e) {
       if (kDebugMode) print(e);
     }

@@ -24,7 +24,10 @@ class AppBarButton extends StatelessWidget {
       onPressed: () {},
       child: Row(
         children: [
-          QText(text: fullName(user.name, user.surname, user.email)),
+          QText(
+            text: fullName(user.name, user.surname, user.email),
+            size: 25,
+          ),
           const QIcon(icon: Icons.arrow_forward_ios),
         ],
       ),

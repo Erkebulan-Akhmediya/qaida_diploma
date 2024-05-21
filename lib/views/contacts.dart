@@ -9,11 +9,7 @@ class Contacts extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        elevation: 0,
-        title: const Search(),
-      ),
+      appBar: AppBar(title: const Search()),
       body: ListView(
         padding: const EdgeInsets.all(20.0),
         children: [

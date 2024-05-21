@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:qaida/components/q_text.dart';
 import 'package:qaida/components/settings/account_settings.dart';
 import 'package:qaida/components/settings/app_settings.dart';
 import 'package:qaida/components/settings/settings_template.dart';
@@ -14,11 +15,20 @@ class Settings extends StatelessWidget {
     return const SettingsTemplate(
       children: [
         Username(),
-        Text('Данные пользователя'),
+        Padding(
+          padding: EdgeInsets.all(7.0),
+          child: QText(text: 'Данные пользователя', size: 17),
+        ),
         UserData(),
-        Text('Приложение'),
+        Padding(
+          padding: EdgeInsets.all(7.0),
+          child: QText(text: 'Приложение', size: 17),
+        ),
         AppSettings(),
-        Text('Аккаунт'),
+        Padding(
+          padding: EdgeInsets.all(7.0),
+          child: QText(text: 'Аккаунт', size: 17),
+        ),
         AccountSettings(),
       ],
     );

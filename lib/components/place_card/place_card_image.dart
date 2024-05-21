@@ -22,18 +22,22 @@ class PlaceCardImage extends StatelessWidget {
         return Container(
           width: 200,
           height: 90,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(10.0),
-            image: place == null || place!['image'] == null || !snapshot.data!
-                ? const DecorationImage(
-                    image: AssetImage('assets/sample.jpg'),
-                    fit: BoxFit.cover,
-                  )
-                : DecorationImage(
-                    image: NetworkImage(place!['image']),
-                    fit: BoxFit.cover,
-                  ),
-          ),
+          decoration:
+              place == null || place!['image'] == null || !snapshot.data!
+                  ? null
+                  : BoxDecoration(
+                      borderRadius: BorderRadius.circular(10.0),
+                      image: DecorationImage(
+                        image: NetworkImage(place!['image']),
+                        fit: BoxFit.cover,
+                      ),
+                    ),
+          child: place == null || place!['image'] == null || !snapshot.data!
+              ? const Padding(
+                  padding: EdgeInsets.only(top: 10.0),
+                  child: Center(child: Icon(Icons.image_outlined, size: 50)),
+                )
+              : null,
         );
       },
     );
