@@ -31,8 +31,7 @@ class ReviewProvider extends ChangeNotifier {
 
   Future sendRating(String visitedId, String placeId, int rating) async {
     try {
-      String? token =
-          await const FlutterSecureStorage().read(key: 'access_token');
+      String? token = await const FlutterSecureStorage().read(key: 'access_token');
 
       await http.post(
         Uri.parse('http://10.0.2.2:8080/api/review'),
@@ -53,9 +52,7 @@ class ReviewProvider extends ChangeNotifier {
           'Authorization': 'Bearer $token',
           'Content-Type': 'application/json',
         },
-        body: json.encode({
-          'status': 'VISITED',
-        }),
+        body: json.encode({'status': 'VISITED'}),
       );
 
       processing.removeWhere((place) => place['_id'] == placeId);

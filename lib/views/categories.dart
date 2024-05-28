@@ -12,8 +12,12 @@ class Categories extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final categories = context.watch<CategoryProvider>().categories;
+    final categoryProvider = context.read<CategoryProvider>();
     return FutureBuilder(
-      future: context.read<CategoryProvider>().getCategories(),
+      future: Future.wait([
+        categoryProvider.getCategories(),
+        categoryProvider.getTopPlaces(),
+      ]),
       builder: (context, snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting &&
             categories.isEmpty) {
@@ -21,6 +25,7 @@ class Categories extends StatelessWidget {
         } else if (snapshot.hasError) {
           return const Center(child: Text('Error'));
         } else {
+          final topPlaces = context.watch<CategoryProvider>().topPlaces;
           return Scaffold(
             appBar: AppBar(title: const Search()),
             body: ListView(
@@ -44,12 +49,12 @@ class Categories extends StatelessWidget {
                 ),
                 SizedBox(
                   height: 180,
-                  child: ListView(
+                  child: GridView.count(
                     scrollDirection: Axis.horizontal,
-                    children: const [
-                      PlaceCard(),
-                      PlaceCard(),
-                      PlaceCard(),
+                    crossAxisCount: 1,
+                    children: [
+                      for (var place in topPlaces)
+                        PlaceCard(place: Map.from(place)),
                     ],
                   ),
                 ),
