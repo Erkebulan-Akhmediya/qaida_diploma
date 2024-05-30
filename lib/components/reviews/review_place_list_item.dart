@@ -28,7 +28,10 @@ class ReviewPlaceListItem extends StatelessWidget {
               ],
             ),
           ),
-          const PassedByButton(),
+          PassedByButton(
+            placeId: place['_id'],
+            visitedId: place['visited_id'],
+          ),
         ],
       ),
     );

@@ -8,6 +8,31 @@ class ReviewProvider extends ChangeNotifier {
   List processing = [];
   int reviewCount = 0;
 
+  Future _changeVisitedStatus(
+    String visitedId,
+    String placeId,
+    String status,
+  ) async {
+    try {
+      String? token =
+          await const FlutterSecureStorage().read(key: 'access_token');
+
+      await http.put(
+        Uri.parse('http://10.0.2.2:8080/api/place/visited/$visitedId'),
+        headers: {
+          'Authorization': 'Bearer $token',
+          'Content-Type': 'application/json',
+        },
+        body: json.encode({'status': status.toUpperCase()}),
+      );
+
+      processing.removeWhere((place) => place['_id'] == placeId);
+      notifyListeners();
+    } catch (e) {
+      if (kDebugMode) print(e);
+    }
+  }
+
   Future getProcessingPlaces() async {
     String? token =
         await const FlutterSecureStorage().read(key: 'access_token');
@@ -31,7 +56,8 @@ class ReviewProvider extends ChangeNotifier {
 
   Future sendRating(String visitedId, String placeId, int rating) async {
     try {
-      String? token = await const FlutterSecureStorage().read(key: 'access_token');
+      String? token =
+          await const FlutterSecureStorage().read(key: 'access_token');
 
       await http.post(
         Uri.parse('http://10.0.2.2:8080/api/review'),
@@ -46,19 +72,13 @@ class ReviewProvider extends ChangeNotifier {
         }),
       );
 
-      await http.put(
-        Uri.parse('http://10.0.2.2:8080/api/place/visited/$visitedId'),
-        headers: {
-          'Authorization': 'Bearer $token',
-          'Content-Type': 'application/json',
-        },
-        body: json.encode({'status': 'VISITED'}),
-      );
-
-      processing.removeWhere((place) => place['_id'] == placeId);
-      notifyListeners();
+      await _changeVisitedStatus(visitedId, placeId, 'VISITED');
     } catch (e) {
       if (kDebugMode) print(e);
     }
+  }
+
+  Future skip(String visitedId, String placeId) async {
+    await _changeVisitedStatus(visitedId, placeId, 'SKIP');
   }
 }

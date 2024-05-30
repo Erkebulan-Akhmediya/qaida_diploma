@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:qaida/components/q_icon.dart';
+import 'package:qaida/components/q_text.dart';
 import 'package:qaida/components/reviews/my_reviews.dart';
 import 'package:qaida/components/reviews/pending_review.dart';
 import 'package:qaida/providers/review.provider.dart';
@@ -25,34 +27,14 @@ class Reviews extends StatelessWidget {
                 backgroundColor: const Color(0xFFF2F3F6),
                 elevation: 0,
                 leading: IconButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  icon: const Icon(
-                    Icons.arrow_back_ios,
-                    color: Color(0xFF1E3050),
-                  ),
+                  onPressed: () => Navigator.pop(context),
+                  icon: const QIcon(icon: Icons.arrow_back_ios),
                 ),
-                title: const Text(
-                  'Мои отзывы',
-                  style: TextStyle(
-                    color: Color(0xFF1E3050),
-                  ),
-                ),
+                title: const QText(text: 'Мои отзывы'),
                 bottom: const TabBar(
                   tabs: [
-                    Tab(
-                      child: Text(
-                        'Ожидают отзыва',
-                        style: TextStyle(color: Color(0xFF1E3050)),
-                      ),
-                    ),
-                    Tab(
-                      child: Text(
-                        'Мои отызывы',
-                        style: TextStyle(color: Color(0xFF1E3050)),
-                      ),
-                    ),
+                    Tab(child: QText(text: 'Ожидают отзыва')),
+                    Tab(child: QText(text: 'Мои отызывы')),
                   ],
                 ),
               ),

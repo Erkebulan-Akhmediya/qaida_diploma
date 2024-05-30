@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:qaida/components/place/might_be_interesting.dart';
 import 'package:qaida/components/place/place_header.dart';
-import 'package:qaida/components/place_card/place_map.dart';
-import 'package:qaida/components/place_card/place_reviews.dart';
+import 'package:qaida/components/place/place_map.dart';
+import 'package:qaida/components/place/review/place_reviews.dart';
 import 'package:qaida/components/search.dart';
 import 'package:qaida/providers/place.provider.dart';
 

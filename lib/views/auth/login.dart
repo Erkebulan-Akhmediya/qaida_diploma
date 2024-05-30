@@ -22,36 +22,29 @@ class Login extends StatelessWidget {
     AuthProvider authProvider,
     LoginProvider loginProvider,
   ) async {
-    if (
-      !authProvider.loginFormKey.currentState!.validate()
-    ) return;
+    if (!authProvider.loginFormKey.currentState!.validate()) return;
+
+    ScaffoldMessengerState scaffoldMessenger = ScaffoldMessenger.of(context);
+    NavigatorState navigator = Navigator.of(context);
 
     final tokens = await context.read<LoginProvider>().login(
-      loginProvider.emailController.text,
-      loginProvider.passwordController.text,
-    );
+          loginProvider.emailController.text,
+          loginProvider.passwordController.text,
+        );
 
     if (tokens == null) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(
-          content: Text('Не удалось войти'),
-        ),
+      scaffoldMessenger.showSnackBar(
+        const SnackBar(content: Text('Не удалось войти')),
       );
       return;
     }
 
     const storage = FlutterSecureStorage();
-    await storage.write(
-      key: 'access_token',
-      value: tokens['access_token']
-    );
-    await storage.write(
-      key: 'refresh_token',
-      value: tokens['refresh_token']
-    );
+    await storage.write(key: 'access_token', value: tokens['access_token']);
+    await storage.write(key: 'refresh_token', value: tokens['refresh_token']);
 
     authProvider.changeAuthStatus();
-    Navigator.pop(context);
+    navigator.pop();
   }
 
   @override

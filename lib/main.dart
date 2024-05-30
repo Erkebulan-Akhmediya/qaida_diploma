@@ -47,18 +47,12 @@ class MyApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       title: 'Qaida',
       theme: ThemeData(
-        scaffoldBackgroundColor: context
-            .watch<ThemeProvider>()
-            .darkWhite,
+        scaffoldBackgroundColor: context.watch<ThemeProvider>().darkWhite,
         appBarTheme: AppBarTheme(
-          backgroundColor: context
-              .watch<ThemeProvider>()
-              .darkWhite,
+          backgroundColor: context.watch<ThemeProvider>().darkWhite,
         ),
         bottomNavigationBarTheme: BottomNavigationBarThemeData(
-          backgroundColor: context
-              .watch<ThemeProvider>()
-              .darkWhite,
+          backgroundColor: context.watch<ThemeProvider>().darkWhite,
           unselectedItemColor: const Color(0x66000000),
           selectedItemColor: const Color(0x66000000),
         ),
