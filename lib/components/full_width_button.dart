@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:qaida/providers/theme.provider.dart';
 
 class FullWidthButton extends StatelessWidget {
   final String text;
@@ -22,6 +24,9 @@ class FullWidthButton extends StatelessWidget {
       height: 40.0,
       child: ElevatedButton(
         style: ButtonStyle(
+          backgroundColor: WidgetStateProperty.all(
+            context.watch<ThemeProvider>().lightBlack,
+          ),
           shape: WidgetStateProperty.all<RoundedRectangleBorder>(
             RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(10.0),
@@ -33,6 +38,7 @@ class FullWidthButton extends StatelessWidget {
           text,
           style: const TextStyle(
             fontSize: 17.0,
+            color: Colors.white,
           ),
         ),
       ),

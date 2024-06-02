@@ -16,24 +16,24 @@ class UserData extends StatelessWidget {
         ForwardButton(
           label: 'Почта',
           text: user.email,
-          page: const ChangeUserData(),
+          page: ChangeUserData(field: 'email'),
         ),
         ForwardButton(
           label: 'Социальная сеть, чтобы переписываться',
           text: user.messengerOne == null ? 'Не указан' : user.messengerOne!,
-          page: const ChangeUserData(),
+          page: ChangeUserData(field: 'messengerOne'),
         ),
         ForwardButton(
           label: 'Социальная сеть, где публикую медиа-контент',
           text: user.messengerTwo == null ? 'Не указан' : user.messengerTwo!,
-          page: const ChangeUserData(),
+          page: ChangeUserData(field: 'messengerTwo'),
         ),
         ForwardButton(
           label: 'Пол',
           text: user.gender == 'MALE'
               ? 'Мужской'
               : (user.gender == 'FEMALE' ? 'Женский' : 'Не указан'),
-          page: const ChangeUserData(),
+          page: ChangeUserData(field: 'gender'),
         ),
       ],
     );

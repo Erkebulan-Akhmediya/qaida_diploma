@@ -31,4 +31,13 @@ class User {
       messengerTwo: map['messenger_two']
     );
   }
+
+  Map<String, dynamic> toMap() {
+    return {
+      'gender': gender,
+      'messengerOne': messengerOne,
+      'messengerTwo': messengerTwo,
+      'email': email,
+    };
+  }
 }
