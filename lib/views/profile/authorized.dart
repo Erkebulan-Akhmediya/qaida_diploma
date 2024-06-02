@@ -5,7 +5,8 @@ import 'package:qaida/components/forward_button.dart';
 import 'package:qaida/components/profile/history.dart';
 import 'package:qaida/components/light_container.dart';
 import 'package:qaida/providers/user.provider.dart';
-import 'package:qaida/views/profile/settings.dart';
+import 'package:qaida/views/profile/settings/settings.dart';
+import 'package:qaida/views/profile/visits.dart';
 
 class Authorized extends StatelessWidget {
   const Authorized({super.key});
@@ -34,7 +35,7 @@ class Authorized extends StatelessWidget {
                   margin: EdgeInsets.only(top: 20, right: 20, left: 20),
                   children: [
                     ForwardButton(text: 'Сохраненные'),
-                    ForwardButton(text: 'Посещенные места'),
+                    ForwardButton(text: 'Посещенные места', page: Visits()),
                     ForwardButton(text: 'Оставленные отзывы'),
                   ],
                 ),

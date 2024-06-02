@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:qaida/components/profile/app_bar/info_button.dart';
 import 'package:qaida/providers/user.provider.dart';
 import 'package:qaida/views/profile/reviews.dart';
+import 'package:qaida/views/profile/visits.dart';
 
 class Info extends StatelessWidget {
   const Info({super.key});
@@ -21,6 +22,7 @@ class Info extends StatelessWidget {
           icon: Icons.place,
           text: 'Посетил(-а)',
           count: context.watch<UserProvider>().visitedCount,
+          page: const Visits(),
         ),
         InfoButton(
           icon: Icons.message,

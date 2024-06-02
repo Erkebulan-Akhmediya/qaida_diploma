@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:qaida/providers/place.provider.dart';
+import 'package:qaida/views/place/place_review_page.dart';
 
 class PlaceReviewItemFooter extends StatelessWidget {
   final List votes;
   final String id;
+  final bool preview;
 
   const PlaceReviewItemFooter({
     super.key,
     required this.votes,
     required this.id,
+    required this.preview,
   });
 
   @override
@@ -60,16 +63,21 @@ class PlaceReviewItemFooter extends StatelessWidget {
                 ],
               ),
             ),
-            IconButton(
-              onPressed: () {},
-              icon: const Row(
-                crossAxisAlignment: CrossAxisAlignment.end,
-                children: [
-                  Text('Все отзывы'),
-                  Icon(Icons.arrow_forward_ios_rounded),
-                ],
+            if (preview)
+              IconButton(
+                onPressed: () {
+                  Navigator.of(context).push(
+                    MaterialPageRoute(builder: (_) => const PlaceReviewPage()),
+                  );
+                },
+                icon: const Row(
+                  crossAxisAlignment: CrossAxisAlignment.end,
+                  children: [
+                    Text('Все отзывы'),
+                    Icon(Icons.arrow_forward_ios_rounded),
+                  ],
+                ),
               ),
-            ),
           ],
         ),
       ],

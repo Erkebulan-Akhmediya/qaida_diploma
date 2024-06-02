@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:qaida/components/forward_button.dart';
 import 'package:qaida/components/light_container.dart';
 import 'package:qaida/providers/user.provider.dart';
+import 'package:qaida/views/profile/settings/change_user_data.dart';
 
 class UserData extends StatelessWidget {
   const UserData({super.key});
@@ -15,21 +16,24 @@ class UserData extends StatelessWidget {
         ForwardButton(
           label: 'Почта',
           text: user.email,
+          page: const ChangeUserData(),
         ),
         ForwardButton(
           label: 'Социальная сеть, чтобы переписываться',
           text: user.messengerOne == null ? 'Не указан' : user.messengerOne!,
+          page: const ChangeUserData(),
         ),
         ForwardButton(
           label: 'Социальная сеть, где публикую медиа-контент',
           text: user.messengerTwo == null ? 'Не указан' : user.messengerTwo!,
+          page: const ChangeUserData(),
         ),
         ForwardButton(
           label: 'Пол',
-          text:
-            user.gender == 'MALE' ?
-            'Мужской' :
-            (user.gender == 'FEMALE' ? 'Женский' : 'Не указан'),
+          text: user.gender == 'MALE'
+              ? 'Мужской'
+              : (user.gender == 'FEMALE' ? 'Женский' : 'Не указан'),
+          page: const ChangeUserData(),
         ),
       ],
     );

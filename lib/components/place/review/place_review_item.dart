@@ -5,14 +5,21 @@ import 'package:qaida/components/place/review/place_review_item_header.dart';
 
 class PlaceReviewItem extends StatelessWidget {
   final Map review;
+  final bool preview;
 
-  const PlaceReviewItem({super.key, required this.review});
+  const PlaceReviewItem({
+    super.key,
+    required this.review,
+    this.preview = false,
+  });
 
   @override
   Widget build(BuildContext context) {
     return Container(
       color: Colors.white,
       padding: const EdgeInsets.all(10.0),
+      height: 280,
+      margin: const EdgeInsets.all(20.0),
       child: Column(
         children: [
           PlaceReviewItemHeader(
@@ -23,6 +30,7 @@ class PlaceReviewItem extends StatelessWidget {
           PlaceReviewItemFooter(
             id: review['_id'],
             votes: review['votes'],
+            preview: preview,
           ),
         ],
       ),

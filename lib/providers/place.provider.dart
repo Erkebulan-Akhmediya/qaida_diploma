@@ -7,6 +7,7 @@ import 'package:http/http.dart' as http;
 class PlaceProvider extends ChangeNotifier {
   late String id;
   Map? place;
+  List reviews = [];
 
   void setId(String id) {
     this.id = id;
@@ -46,6 +47,7 @@ class PlaceProvider extends ChangeNotifier {
         ),
       );
       List reviews = List.from(jsonDecode(response.body));
+      this.reviews = reviews;
       return reviews;
     } catch(_) {
       rethrow;
