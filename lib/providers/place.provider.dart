@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:http/http.dart' as http;
 
 class PlaceProvider extends ChangeNotifier {
@@ -50,4 +51,24 @@ class PlaceProvider extends ChangeNotifier {
       rethrow;
     }
   }
+
+  Future voteReview(String reviewId, String type) async {
+    try {
+      const storage = FlutterSecureStorage();
+      String? token = await storage.read(key: 'access_token');
+
+      await http.post(
+        Uri.parse('http://10.0.2.2:8080/api/review/vote/$reviewId'),
+        headers: {
+          'Authorization': 'Bearer $token',
+        },
+        body: json.encode({
+          'type': type,
+        }),
+      );
+    } catch(e) {
+      if (kDebugMode) print(e);
+    }
+  }
+
 }

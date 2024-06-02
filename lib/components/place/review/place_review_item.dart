@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:qaida/components/place/review/place_review_item_body.dart';
+import 'package:qaida/components/place/review/place_review_item_footer.dart';
 import 'package:qaida/components/place/review/place_review_item_header.dart';
 
 class PlaceReviewItem extends StatelessWidget {
@@ -11,6 +12,7 @@ class PlaceReviewItem extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       color: Colors.white,
+      padding: const EdgeInsets.all(10.0),
       child: Column(
         children: [
           PlaceReviewItemHeader(
@@ -18,6 +20,10 @@ class PlaceReviewItem extends StatelessWidget {
             date: review['created_at'],
           ),
           PlaceReviewItemBody(comment: review['comment']),
+          PlaceReviewItemFooter(
+            id: review['_id'],
+            votes: review['votes'],
+          ),
         ],
       ),
     );

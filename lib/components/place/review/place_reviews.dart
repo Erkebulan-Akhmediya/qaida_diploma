@@ -15,9 +15,9 @@ class PlaceReviews extends StatelessWidget {
       children: [
         const QText(text: 'Оценки и отзывы'),
         Container(
-          height: 200,
+          height: 300,
           color: context.watch<ThemeProvider>().lightWhite,
-          padding: const EdgeInsets.all(10.0),
+          padding: const EdgeInsets.all(20.0),
           child: FutureBuilder<List>(
             future: context.read<PlaceProvider>().getPlaceReview(),
             builder: (context, snapshot) {
