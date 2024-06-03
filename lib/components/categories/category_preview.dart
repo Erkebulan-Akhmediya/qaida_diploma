@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:qaida/components/all_button.dart';
 import 'package:qaida/components/place_card/place_card.dart';
 import 'package:qaida/providers/category.provider.dart';
+import 'package:qaida/views/categories/category_places.dart';
 
 class CategoryPreview extends StatelessWidget {
   final int index;
@@ -36,7 +37,18 @@ class CategoryPreview extends StatelessWidget {
                         fontSize: 15.0,
                       ),
                     ),
-                    const AllButton(),
+                    AllButton(
+                      onPressed: () {
+                        Navigator.of(context).push(
+                          MaterialPageRoute(
+                            builder: (_) => CategoryPlaces(
+                              places: snapshot.data!,
+                              category: categories[index]['name'],
+                            ),
+                          ),
+                        );
+                      },
+                    ),
                   ],
                 ),
               ),

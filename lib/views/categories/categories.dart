@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:qaida/components/all_button.dart';
 import 'package:qaida/components/categories/category_preview.dart';
 import 'package:qaida/components/place_card/place_card.dart';
 import 'package:qaida/components/search.dart';
@@ -43,7 +42,6 @@ class Categories extends StatelessWidget {
                           fontSize: 20.0,
                         ),
                       ),
-                      AllButton(),
                     ],
                   ),
                 ),
