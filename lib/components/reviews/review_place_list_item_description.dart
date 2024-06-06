@@ -9,6 +9,7 @@ class ReviewPlaceListItemDescription extends StatelessWidget {
   final String visitedId;
   final String title;
   final String address;
+  final bool showMode;
 
   const ReviewPlaceListItemDescription({
     super.key,
@@ -16,6 +17,7 @@ class ReviewPlaceListItemDescription extends StatelessWidget {
     required this.title,
     required this.address,
     required this.visitedId,
+    this.showMode = false,
   });
 
   @override
@@ -23,6 +25,7 @@ class ReviewPlaceListItemDescription extends StatelessWidget {
     return Expanded(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Text(title, overflow: TextOverflow.ellipsis),
           Text(address),
@@ -31,7 +34,10 @@ class ReviewPlaceListItemDescription extends StatelessWidget {
               Icons.star_rounded,
               color: Colors.yellow,
             ),
+            initialRating: showMode ? 4 : 0,
+            ignoreGestures: showMode,
             onRatingUpdate: (double value) async {
+              if (showMode) return;
               try {
                 await context
                     .read<ReviewProvider>()

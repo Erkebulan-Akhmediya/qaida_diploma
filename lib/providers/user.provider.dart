@@ -35,7 +35,11 @@ class UserProvider extends ChangeNotifier {
       },
     );
     List visited = List.from(jsonDecode(response.body));
-    visitedPlaces = visited.map((visit) => visit['place_id']).toList();
+    visitedPlaces = visited.map((visit) {
+      final place = visit['place_id'];
+      place['visited_id'] = visit['_id'];
+      return place;
+    }).toList();
     visitedCount = visited.length;
     reviewCount =
         visited.map((visit) => visit['status'] == 'VISITED').toList().length;
