@@ -2,14 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:qaida/components/place_card/place_card.dart';
 import 'package:qaida/components/q_text.dart';
-import 'package:qaida/providers/user.provider.dart';
+import 'package:qaida/providers/history.provider.dart';
 
 class History extends StatelessWidget {
   const History({super.key});
 
   @override
   Widget build(BuildContext context) {
-    final visited = context.watch<UserProvider>().visitedPlaces;
     return Container(
       padding: const EdgeInsets.only(left: 22, right: 22, bottom: 20),
       margin: const EdgeInsets.only(top: 30.0),
@@ -30,14 +29,22 @@ class History extends StatelessWidget {
             ),
           ),
           Expanded(
-            child: GridView.count(
-              scrollDirection: Axis.horizontal,
-              childAspectRatio: 3/4,
-              crossAxisCount: 1,
-              children: [
-                for (int i = 0; i < 5; i++)
-                  PlaceCard(place: visited[i]),
-              ],
+            child: FutureBuilder(
+              future: context.read<HistoryProvider>().getHistory(),
+              builder: (context, snapshot) {
+                if (snapshot.hasData) {
+                  return GridView.count(
+                    scrollDirection: Axis.horizontal,
+                    childAspectRatio: 3/4,
+                    crossAxisCount: 1,
+                    children: [
+                      for (var place in snapshot.data!) PlaceCard(place: place),
+                    ],
+                  );
+                } else {
+                  return const Center(child: CircularProgressIndicator());
+                }
+              },
             ),
           ),
         ],

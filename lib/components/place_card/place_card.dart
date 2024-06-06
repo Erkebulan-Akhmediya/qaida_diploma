@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:qaida/components/place_card/place_card_image.dart';
 import 'package:qaida/components/q_text.dart';
+import 'package:qaida/providers/history.provider.dart';
 import 'package:qaida/providers/place.provider.dart';
 import 'package:qaida/views/place/place.dart';
 
@@ -37,11 +38,10 @@ class PlaceCard extends StatelessWidget {
       onTap: () async {
         if (place == null) return;
         context.read<PlaceProvider>().setId(place!['_id']);
-        Navigator.push(
-          context,
-          MaterialPageRoute(
-            builder: (context) => const Place(),
-          ),
+        final NavigatorState navigator = Navigator.of(context);
+        await context.read<HistoryProvider>().addHistory(place!);
+        navigator.push(
+          MaterialPageRoute(builder: (_) => const Place()),
         );
       },
       child: Container(
@@ -61,7 +61,8 @@ class PlaceCard extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     QText(
-                      text: place == null ? 'Хан шатыр' : decode(place!['title']),
+                      text:
+                          place == null ? 'Хан шатыр' : decode(place!['title']),
                       weight: FontWeight.bold,
                     ),
                     QText(

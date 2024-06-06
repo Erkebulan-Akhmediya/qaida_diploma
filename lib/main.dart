@@ -3,6 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:qaida/providers/auth.provider.dart';
 import 'package:qaida/providers/category.provider.dart';
 import 'package:qaida/providers/geolocation.provider.dart';
+import 'package:qaida/providers/history.provider.dart';
 import 'package:qaida/providers/interests.provider.dart';
 import 'package:qaida/providers/login.provider.dart';
 import 'package:qaida/providers/place.provider.dart';
@@ -31,6 +32,7 @@ void main() {
         ChangeNotifierProvider(create: (_) => RecommendationProvider()),
         ChangeNotifierProvider(create: (_) => PlaceProvider()),
         ChangeNotifierProvider(create: (_) => ThemeProvider()),
+        ChangeNotifierProvider(create: (_) => HistoryProvider()),
       ],
       child: const MyApp(),
     ),

@@ -21,7 +21,11 @@ class PlaceReviews extends StatelessWidget {
             builder: (context, snapshot) {
               if (snapshot.hasData) {
                 final reviews = snapshot.data!;
-                return PlaceReviewItem(review: reviews[0], preview: true);
+                if (reviews.isNotEmpty) {
+                  return PlaceReviewItem(review: reviews[0], preview: true);
+                } else {
+                  return const Center(child: QText(text: 'Пока нет отзывов'));
+                }
               } else {
                 return const Center(child: CircularProgressIndicator());
               }
