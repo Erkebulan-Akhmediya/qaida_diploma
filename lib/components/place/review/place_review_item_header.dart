@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:qaida/components/q_text.dart';
 
 class PlaceReviewItemHeader extends StatelessWidget {
   final int score;
   final String date;
+  final Map user;
 
   const PlaceReviewItemHeader({
     super.key,
     required this.score,
     required this.date,
+    required this.user,
   });
 
   @override
@@ -21,12 +25,20 @@ class PlaceReviewItemHeader extends StatelessWidget {
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Row(
-              children: [
-                for (int i = 0; i < score; i++) const Icon(Icons.star_rounded),
-              ],
+            RatingBar.builder(
+              itemBuilder: (_, __) => const Icon(
+                Icons.star_rounded,
+                color: Colors.orange,
+              ),
+              itemSize: 20,
+              ignoreGestures: true,
+              initialRating: score.toDouble(),
+              onRatingUpdate: (value) {},
             ),
-            Text(date.substring(0, 10)),
+            QText(
+              text:
+                  '${user['name'] ?? user['email']} • ${date.substring(0, 10)}',
+            ),
           ],
         ),
       ],

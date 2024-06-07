@@ -39,10 +39,17 @@ class PlaceCard extends StatelessWidget {
         if (place == null) return;
         context.read<PlaceProvider>().setId(place!['_id']);
         final NavigatorState navigator = Navigator.of(context);
+        final ScaffoldMessengerState messenger = ScaffoldMessenger.of(context);
         await context.read<HistoryProvider>().addHistory(place!);
-        navigator.push(
-          MaterialPageRoute(builder: (_) => const Place()),
-        );
+        try {
+          navigator.push(
+            MaterialPageRoute(builder: (_) => const Place()),
+          );
+        } catch (_) {
+          messenger.showSnackBar(
+            const SnackBar(content: Text('Не удалось открыть страницу')),
+          );
+        }
       },
       child: Container(
         height: 90,

@@ -3,7 +3,7 @@ import 'package:provider/provider.dart';
 import 'package:qaida/providers/place.provider.dart';
 import 'package:qaida/views/place/place_review_page.dart';
 
-class PlaceReviewItemFooter extends StatelessWidget {
+class PlaceReviewItemFooter extends StatefulWidget {
   final List votes;
   final String id;
   final bool preview;
@@ -16,11 +16,24 @@ class PlaceReviewItemFooter extends StatelessWidget {
   });
 
   @override
+  State<StatefulWidget> createState() => _PlaceReviewItemFooterState();
+}
+
+class _PlaceReviewItemFooterState extends State<PlaceReviewItemFooter> {
+  int positiveCount = 0;
+  int negativeCount = 0;
+
+  @override
+  void initState() {
+    super.initState();
+    positiveCount =
+        widget.votes.where((vote) => vote['type'] == 'POSITIVE').length;
+    negativeCount =
+        widget.votes.where((vote) => vote['type'] == 'NEGATIVE').length;
+  }
+
+  @override
   Widget build(BuildContext context) {
-    int positiveCount =
-        votes.where((vote) => vote['type'] == 'POSITIVE').length;
-    int negativeCount =
-        votes.where((vote) => vote['type'] == 'NEGATIVE').length;
     final placeProvider = context.read<PlaceProvider>();
     return Column(
       children: [
@@ -32,8 +45,10 @@ class PlaceReviewItemFooter extends StatelessWidget {
                 children: [
                   IconButton(
                     onPressed: () async {
-                      await placeProvider.voteReview(id, 'POSITIVE');
-                      positiveCount++;
+                      await placeProvider.voteReview(widget.id, 'POSITIVE');
+                      setState(() {
+                        positiveCount++;
+                      });
                     },
                     icon: Row(
                       children: [
@@ -47,8 +62,10 @@ class PlaceReviewItemFooter extends StatelessWidget {
                   ),
                   IconButton(
                     onPressed: () async {
-                      await placeProvider.voteReview(id, 'NEGATIVE');
-                      negativeCount++;
+                      await placeProvider.voteReview(widget.id, 'NEGATIVE');
+                      setState(() {
+                        negativeCount++;
+                      });
                     },
                     icon: Row(
                       children: [
@@ -63,7 +80,7 @@ class PlaceReviewItemFooter extends StatelessWidget {
                 ],
               ),
             ),
-            if (preview)
+            if (widget.preview)
               IconButton(
                 onPressed: () {
                   Navigator.of(context).push(

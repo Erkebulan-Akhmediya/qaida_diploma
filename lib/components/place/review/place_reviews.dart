@@ -13,7 +13,10 @@ class PlaceReviews extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const QText(text: 'Оценки и отзывы'),
+        const Padding(
+          padding: EdgeInsets.all(8.0),
+          child: QText(text: 'Оценки и отзывы', weight: FontWeight.bold),
+        ),
         Container(
           color: context.watch<ThemeProvider>().lightWhite,
           child: FutureBuilder<List>(

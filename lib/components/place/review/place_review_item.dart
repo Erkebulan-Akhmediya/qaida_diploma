@@ -16,15 +16,19 @@ class PlaceReviewItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.white,
-      padding: const EdgeInsets.all(10.0),
+      padding: const EdgeInsets.all(15.0),
       height: 280,
       margin: const EdgeInsets.all(20.0),
+      decoration: const BoxDecoration(
+        borderRadius: BorderRadius.all(Radius.circular(15)),
+        color: Colors.white,
+      ),
       child: Column(
         children: [
           PlaceReviewItemHeader(
             score: int.parse(review['score']['\$numberDecimal']),
             date: review['created_at'],
+            user: review['user_id'],
           ),
           PlaceReviewItemBody(comment: review['comment']),
           PlaceReviewItemFooter(
