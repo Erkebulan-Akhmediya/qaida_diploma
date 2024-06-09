@@ -40,7 +40,7 @@ class PlaceCard extends StatelessWidget {
         context.read<PlaceProvider>().setId(place!['_id']);
         final NavigatorState navigator = Navigator.of(context);
         final ScaffoldMessengerState messenger = ScaffoldMessenger.of(context);
-        await context.read<HistoryProvider>().addHistory(place!);
+        await context.read<HistoryProvider>().addHistory(place?['_id']);
         try {
           navigator.push(
             MaterialPageRoute(builder: (_) => const Place()),

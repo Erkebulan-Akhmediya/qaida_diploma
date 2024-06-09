@@ -31,7 +31,7 @@ class MightBeInteresting extends StatelessWidget {
                     scrollDirection: Axis.horizontal,
                     crossAxisCount: 1,
                     children: [
-                      for (int i = 0; i < 5; i++)
+                      for (int i = 0; i < snapshot.data?.length && i < 5; i++)
                         PlaceCard(place: Map.from(snapshot.data?[i])),
                     ],
                   );

@@ -44,7 +44,6 @@ class Authorized extends StatelessWidget {
                   children: [
                     ForwardButton(text: 'Настройки', page: Settings()),
                     ForwardButton(text: 'О нас'),
-                    ForwardButton(text: 'Помощь'),
                   ],
                 ),
               ],
