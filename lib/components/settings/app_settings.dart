@@ -9,8 +9,6 @@ class AppSettings extends StatelessWidget {
   Widget build(BuildContext context) {
     return const LightContainer(
       children: [
-        ForwardButton(text: 'Цвет приложения',),
-        ForwardButton(text: 'Выбрать язык',),
         ForwardButton(text: 'Удалить историю просмотра', icon: false,),
         ForwardButton(text: 'Удалить историю посещений', icon: false,),
       ],

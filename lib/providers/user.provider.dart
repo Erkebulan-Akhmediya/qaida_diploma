@@ -1,8 +1,10 @@
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:http/http.dart' as http;
+import 'package:image_picker/image_picker.dart';
 import 'package:qaida/data/user.data.dart';
 
 class UserProvider extends ChangeNotifier {
@@ -44,4 +46,64 @@ class UserProvider extends ChangeNotifier {
     reviewCount =
         visited.map((visit) => visit['status'] == 'VISITED').toList().length;
   }
+
+  Future changeUser(User user, bool deactivate) async {
+    try {
+      const storage = FlutterSecureStorage();
+      final String? token = await storage.read(key: 'access_token');
+      await http.patch(
+        Uri.parse('http://10.0.2.2:8080/api/user/update'),
+        headers: {
+          'Authorization': 'Bearer $token',
+          'Content-Type': 'application/json',
+        },
+        body: jsonEncode({
+          '_id': user.id,
+          'isDiactivated': deactivate,
+          'name': user.name,
+          'surname': user.surname,
+          'father_name': user.fatherName,
+          'password': user.password,
+          'email': user.email,
+          'messenger_one': user.messengerOne,
+          'messenger_two': user.messengerTwo,
+          'gender': user.gender,
+        }),
+      );
+      myself = user;
+      notifyListeners();
+    } catch (_) {
+      rethrow;
+    }
+  }
+
+  Future changeAvatar() async {
+    try {
+      const storage = FlutterSecureStorage();
+      final token = await storage.read(key: 'access_token');
+
+      final picker = ImagePicker();
+      final image = await picker.pickImage(source: ImageSource.gallery);
+      final file = File(image!.path);
+
+      var request = http.MultipartRequest(
+        'PATCH',
+        Uri.parse('http://10.0.2.2:8080/api/user/avatar'),
+      );
+
+      request.headers.addAll({'Authorization': 'Bearer $token'});
+      request.files.add(await http.MultipartFile.fromPath('image', file.path));
+      var response = await request.send();
+
+      if (response.statusCode > 300) {
+        throw Exception('${response.statusCode}: ${response.reasonPhrase}');
+      } else {
+        await getMe();
+      }
+    } catch (e) {
+      if (kDebugMode) print(e);
+      rethrow;
+    }
+  }
+
 }

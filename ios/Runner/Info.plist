@@ -2,6 +2,8 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
+<key>NSPhotoLibraryUsageDescription</key>
+<string>App needs access to the photo library for image selection.</string>
     <key>NSLocationWhenInUseUsageDescription</key>
     <string>never gonna give you up</string>
     <key>NSAppTransportSecurity</key>

@@ -19,7 +19,7 @@ class Username extends StatelessWidget {
           GestureDetector(
             onTap: () {
               Navigator.of(context).push(
-                MaterialPageRoute(builder: (_) => const ChangeUsername()),
+                MaterialPageRoute(builder: (_) => ChangeUsername()),
               );
             },
             child: Column(
@@ -32,7 +32,7 @@ class Username extends StatelessWidget {
                   ),
                 ),
                 Text(
-                  '${user.name} ${user.surname}',
+                  '${user.name ?? 'Не указан'} ${user.surname ?? ''}',
                   style: const TextStyle(
                     fontSize: 20.0,
                   ),
