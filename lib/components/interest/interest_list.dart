@@ -8,12 +8,26 @@ class InterestList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final interestProvider = context.watch<InterestsProvider>();
     return Expanded(
-      child: ListView.builder(
-        itemCount: interestProvider.interests.length,
-        itemBuilder: (context, index) {
-          return InterestItem(index: index);
+      child: FutureBuilder(
+        future: context.read<InterestsProvider>().fetchInterests(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return const Center(child: CircularProgressIndicator());
+          } else if (snapshot.hasError) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(content: Text('Ошибка. Попробуйте позже')),
+            );
+            Navigator.of(context).pop();
+            return Container();
+          } else {
+            return ListView.builder(
+              itemCount: context.watch<InterestsProvider>().interests.length,
+              itemBuilder: (context, index) {
+                return InterestItem(index: index);
+              },
+            );
+          }
         },
       ),
     );

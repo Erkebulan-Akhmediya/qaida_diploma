@@ -56,4 +56,8 @@ class InterestsProvider extends ChangeNotifier {
       ).query,
     );
   }
+
+  Future getUserInterests(bool exists) async {
+
+  }
 }

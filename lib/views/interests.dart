@@ -5,7 +5,9 @@ import 'package:qaida/components/interest/interest_list.dart';
 import 'package:qaida/components/interest/interest_template.dart';
 
 class Interests extends StatelessWidget {
-  const Interests({super.key});
+  final bool edit;
+
+  const Interests({super.key, this.edit = false});
 
   @override
   Widget build(BuildContext context) {

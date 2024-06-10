@@ -16,17 +16,23 @@ class InterestItem extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.all(10.0),
       child: Row(
-        crossAxisAlignment: interestProvider.openItems[index] ? CrossAxisAlignment.start : CrossAxisAlignment.center,
+        crossAxisAlignment: interestProvider.openItems[index]
+            ? CrossAxisAlignment.start
+            : CrossAxisAlignment.center,
         children: <Widget>[
           GestureDetector(
-            onTap: () { context.read<InterestsProvider>().changeOpen(index); },
+            onTap: () {
+              context.read<InterestsProvider>().changeOpen(index);
+            },
             child: InterestIcon(index: index),
           ),
           GestureDetector(
-            onTap: () { context.read<InterestsProvider>().changeSelect(index); },
-            child: interestProvider.openItems[index] ?
-              InterestSubcategories(index: index) :
-              InterestText(index: index),
+            onTap: () {
+              context.read<InterestsProvider>().changeSelect(index);
+            },
+            child: interestProvider.openItems[index]
+                ? InterestSubcategories(index: index)
+                : InterestText(index: index),
           ),
         ],
       ),

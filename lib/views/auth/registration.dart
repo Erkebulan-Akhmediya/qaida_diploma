@@ -8,7 +8,6 @@ import 'package:qaida/components/auth/validators.dart';
 import 'package:qaida/components/full_width_button.dart';
 import 'package:qaida/components/auth/password.dart';
 import 'package:qaida/providers/auth.provider.dart';
-import 'package:qaida/providers/interests.provider.dart';
 import 'package:qaida/providers/login.provider.dart';
 import 'package:qaida/providers/registration.provider.dart';
 
@@ -56,7 +55,6 @@ class Registration extends StatelessWidget {
         key: 'refresh_token',
         value: response['refresh_token']
       );
-      await context.read<InterestsProvider>().fetchInterests();
       navToInterest(context);
     } catch(e) {
       context.read<AuthProvider>().changeAuthPage();
