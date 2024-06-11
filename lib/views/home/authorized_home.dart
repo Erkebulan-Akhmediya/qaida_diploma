@@ -15,8 +15,7 @@ class AuthorizedHome extends StatelessWidget {
       future:
           context.read<RecommendationProvider>().getRecommendedPlaces(user.id),
       builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.waiting &&
-            context.watch<RecommendationProvider>().places.isEmpty) {
+        if (snapshot.connectionState == ConnectionState.waiting) {
           return const Center(child: CircularProgressIndicator());
         } else if (snapshot.hasError) {
           return const Center(child: Text('Error'));

@@ -13,7 +13,7 @@ class AppSettings extends StatelessWidget {
         ForwardButton(
           text: 'Изменить интересы',
           icon: false,
-          page: Interests(edit: true),
+          page: Interests(),
         ),
         ForwardButton(text: 'Удалить историю просмотра', icon: false),
         ForwardButton(text: 'Удалить историю посещений', icon: false),

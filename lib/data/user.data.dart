@@ -10,6 +10,7 @@ class User {
   String? messengerTwo;
   String password;
   String? imageId;
+  List interests = [];
 
   User({
     required this.id,
@@ -23,6 +24,7 @@ class User {
     required this.messengerTwo,
     required this.password,
     required this.imageId,
+    required this.interests,
   });
 
   factory User.fromMap(map) {
@@ -38,6 +40,7 @@ class User {
       messengerTwo: map['messenger_two'],
       password: map['password'],
       imageId: map['image_id'],
+      interests: map['interests'],
     );
   }
 

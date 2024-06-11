@@ -55,6 +55,7 @@ class Registration extends StatelessWidget {
         key: 'refresh_token',
         value: response['refresh_token']
       );
+      context.read<AuthProvider>().changeAuthStatus();
       navToInterest(context);
     } catch(e) {
       context.read<AuthProvider>().changeAuthPage();

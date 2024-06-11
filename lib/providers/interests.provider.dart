@@ -34,14 +34,14 @@ class InterestsProvider extends ChangeNotifier {
 
   Future<void> fetchInterests() async {
     final response = await http.get(
-      Uri.parse("http://10.0.2.2:8080/api/categories?q=")
+      Uri.parse("http://10.0.2.2:8080/api/categories?q="),
     );
     interests = jsonDecode(response.body);
     openItems = List<bool>.filled(interests.length, false);
     selectedItems = List<bool>.filled(interests.length, false);
     notifyListeners();
   }
-  
+
   Future sendInterests(String token, List<String> interests) async {
     await http.put(
       Uri.parse('http://10.0.2.2:8080/api/user/interest'),
@@ -57,7 +57,22 @@ class InterestsProvider extends ChangeNotifier {
     );
   }
 
-  Future getUserInterests(bool exists) async {
-
+  void getUserInterests(List interests) {
+    if (interests.isEmpty) return;
+    for (var interest in interests) {
+      if (interest['name'] == 'Спокойный отдых') {
+        selectedItems[0] = true;
+      } else if (interest['name'] == 'Еда и напитки') {
+        selectedItems[1] = true;
+      } else if (interest['name'] == 'Спорт') {
+        selectedItems[2] = true;
+      } else if (interest['name'] == 'Социальные') {
+        selectedItems[3] = true;
+      } else {
+        // Активный отдых
+        selectedItems[4] = true;
+      }
+    }
+    notifyListeners();
   }
 }
