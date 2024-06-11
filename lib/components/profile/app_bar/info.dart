@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:qaida/components/profile/app_bar/info_button.dart';
 import 'package:qaida/providers/user.provider.dart';
+import 'package:qaida/views/profile/favorites.dart';
 import 'package:qaida/views/profile/reviews.dart';
 import 'package:qaida/views/profile/visits.dart';
 
@@ -17,6 +18,7 @@ class Info extends StatelessWidget {
           icon: Icons.bookmark,
           text: 'Избранные',
           count: user.favorites.length,
+          page: const Favorites(),
         ),
         InfoButton(
           icon: Icons.place,

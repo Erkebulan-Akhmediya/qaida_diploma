@@ -106,4 +106,54 @@ class UserProvider extends ChangeNotifier {
     }
   }
 
+  Future getFavPlaces() async {
+    try {
+      final favPlaces = [];
+      for (var place in myself.favorites) {
+        final response = await http.get(
+          Uri.parse('http://10.0.2.2:8080/api/place/place/${place['_id']}'),
+        );
+        favPlaces.add(jsonDecode(response.body));
+      }
+      return favPlaces;
+    } catch (e) {
+      if (kDebugMode) print(e);
+      rethrow;
+    }
+  }
+
+  Future changeFavPlaces(String placeId, bool toAdd) async {
+    try {
+      const storage = FlutterSecureStorage();
+      final token = await storage.read(key: 'access_token');
+
+      final favIds = [];
+      for (var place in myself.favorites) {
+        favIds.add(place['_id']);
+      }
+      if (toAdd) {
+        favIds.add(placeId);
+      } else {
+        favIds.removeWhere((id) => id == placeId);
+      }
+
+      final response = await http.put(
+        Uri.parse('http://10.0.2.2:8080/api/user/favorites'),
+        headers: {
+          'Authorization': 'Bearer $token',
+          'Content-type': 'application/json'
+        },
+        body: jsonEncode({
+          'place_ids': favIds,
+        }),
+      );
+      if (response.statusCode > 300) {
+        throw Exception('${response.statusCode}: ${response.reasonPhrase}');
+      }
+      notifyListeners();
+    } catch (e) {
+      if (kDebugMode) print(e);
+      rethrow;
+    }
+  }
 }

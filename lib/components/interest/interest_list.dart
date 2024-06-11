@@ -25,15 +25,15 @@ class InterestList extends StatelessWidget {
           } else {
             try {
               final user = context.watch<UserProvider>().myself;
-              context.read<InterestsProvider>().getUserInterests(user.interests);
-            } catch(e) {
+              context
+                  .read<InterestsProvider>()
+                  .getUserInterests(user.interests);
+            } catch (e) {
               if (kDebugMode) print(e);
             }
             return ListView.builder(
               itemCount: context.watch<InterestsProvider>().interests.length,
-              itemBuilder: (context, index) {
-                return InterestItem(index: index);
-              },
+              itemBuilder: (_, index) => InterestItem(index: index),
             );
           }
         },

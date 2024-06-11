@@ -31,7 +31,7 @@ class Place extends StatelessWidget {
               return const Center(child: Text('Error'));
             } else {
               final place = context.watch<PlaceProvider>().place;
-              if (place == null) {
+              if (place == null || place['error'] != null) {
                 return const Center(child: Text('Нет такого места'));
               }
               return ListView(

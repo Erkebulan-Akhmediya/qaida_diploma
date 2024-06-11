@@ -4,7 +4,7 @@ class User {
   String? surname;
   String? fatherName;
   String email;
-  List favorites;
+  List favorites = [];
   String gender;
   String? messengerOne;
   String? messengerTwo;
