@@ -11,10 +11,9 @@ class PlaceHeader extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final place = context.watch<PlaceProvider>().place;
-    final user = context.watch<UserProvider>().myself;
-    final isLiked = user.favorites.any(
-      (favPlace) => favPlace['_id'] == place?['_id'],
-    );
+    final isLiked = context.watch<UserProvider>().myself.favorites.any(
+          (favPlace) => favPlace['_id'] == place?['_id'],
+        );
     return Container(
       decoration: const BoxDecoration(
         color: Color(0xFFFAFAFA),
@@ -60,15 +59,9 @@ class PlaceHeader extends StatelessWidget {
                         final messenger = ScaffoldMessenger.of(context);
                         try {
                           await context.read<UserProvider>().changeFavPlaces(
-                                place?['_id'],
+                                place!,
                                 !isLiked,
                               );
-                          if (isLiked) {
-                            user.favorites.removeWhere(
-                                (favPlace) => favPlace == place?['_id']);
-                          } else {
-                            user.favorites.add(place?['_id']);
-                          }
                         } catch (_) {
                           messenger.showSnackBar(
                             const SnackBar(

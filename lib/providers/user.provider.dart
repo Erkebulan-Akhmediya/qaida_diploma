@@ -122,20 +122,24 @@ class UserProvider extends ChangeNotifier {
     }
   }
 
-  Future changeFavPlaces(String placeId, bool toAdd) async {
+  Future changeFavPlaces(Map place, bool toAdd) async {
     try {
       const storage = FlutterSecureStorage();
       final token = await storage.read(key: 'access_token');
+
+      if (toAdd) {
+        myself.favorites.add(place);
+      } else {
+        myself.favorites.removeWhere(
+          (favPlace) => favPlace['_id'] == place['_id'],
+        );
+      }
 
       final favIds = [];
       for (var place in myself.favorites) {
         favIds.add(place['_id']);
       }
-      if (toAdd) {
-        favIds.add(placeId);
-      } else {
-        favIds.removeWhere((id) => id == placeId);
-      }
+
 
       final response = await http.put(
         Uri.parse('http://10.0.2.2:8080/api/user/favorites'),
