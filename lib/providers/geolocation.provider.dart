@@ -31,14 +31,15 @@ class GeolocationProvider extends ChangeNotifier {
         OptionBuilder().setTransports(['websocket']).build(),
       );
       socket?.onConnect((data) {
-        print('connected');
+        if (kDebugMode) print('connected');
       });
       socket?.on('spot', (data) {
-        print(data);
+        if (kDebugMode) print(data);
       });
-      print('listenning to spot events');
+      if (kDebugMode) print('listenning to spot events');
+
     } else {
-      print('already connected');
+      if (kDebugMode) print('already connected');
     }
   }
 

@@ -18,16 +18,3 @@ class Main extends StatelessWidget {
     );
   }
 }
-
-// () async {
-//   final location = await context.read<GeolocationProvider>().getLocation();
-//   final user = context.watch<UserProvider>().myself;
-//
-//   context.read<GeolocationProvider>().connect();
-//   context.read<GeolocationProvider>().sendLocation(
-//     user.id,
-//     location['lat'],
-//     location['lon'],
-//   );
-//   context.read<GeolocationProvider>().close();
-// }

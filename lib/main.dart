@@ -1,3 +1,6 @@
+import 'dart:async';
+
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:qaida/providers/auth.provider.dart';
@@ -39,10 +42,40 @@ void main() {
   );
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
+  @override
+  State<StatefulWidget> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  late Timer timer;
+
+  @override
+  void initState() {
+    super.initState();
+    timer = Timer.periodic(const Duration(seconds: 5), (t) async {
+      if (kDebugMode) print('runnin');
+      if (context.read<AuthProvider>().isAuthorized) {
+        final userPro = Provider.of<UserProvider>(context, listen: false);
+        final user = userPro.myself;
+        final geoProv = context.read<GeolocationProvider>();
+        final location = await context.read<GeolocationProvider>().getLocation();
+
+        geoProv.connect();
+        geoProv.sendLocation(user.id, location['lat'], location['lon']);
+        geoProv.close();
+      }
+    });
+  }
+
+  @override
+  void dispose() {
+    timer.cancel();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
