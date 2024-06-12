@@ -14,8 +14,14 @@ class RecommendationProvider extends ChangeNotifier {
         body: json.encode({ 'user_id': userId }),
       );
       places = List.from(jsonDecode(response.body));
+      notifyListeners();
     } catch(e) {
       if (kDebugMode) print(e);
     }
+  }
+
+  void clearRecommendations() {
+    places.clear();
+    notifyListeners();
   }
 }

@@ -15,7 +15,7 @@ class AuthorizedHome extends StatelessWidget {
       future:
           context.read<RecommendationProvider>().getRecommendedPlaces(user.id),
       builder: (context, snapshot) {
-        if (snapshot.connectionState == ConnectionState.waiting) {
+        if (snapshot.connectionState == ConnectionState.waiting && places.isEmpty) {
           return const Center(child: CircularProgressIndicator());
         } else if (snapshot.hasError) {
           return const Center(child: Text('Error'));
@@ -36,12 +36,17 @@ class AuthorizedHome extends StatelessWidget {
                   ),
                 ),
                 Expanded(
-                  child: GridView.count(
-                    crossAxisCount: 2,
-                    children: [
-                      for (var place in places)
-                        PlaceCard(place: place, encoded: true),
-                    ],
+                  child: RefreshIndicator(
+                    onRefresh: () async {
+                      context.read<RecommendationProvider>().clearRecommendations();
+                    },
+                    child: GridView.count(
+                      crossAxisCount: 2,
+                      children: [
+                        for (var place in places)
+                          PlaceCard(place: place, encoded: true),
+                      ],
+                    ),
                   ),
                 ),
               ],
